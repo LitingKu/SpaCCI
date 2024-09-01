@@ -1,0 +1,45 @@
+Package: SpaCCI
+Type: Package
+Title: Spatially Aware Cell-Cell Interaction Analysis
+Version: 1.0
+Date: 2024-08-29
+Author: Li-Ting Ku
+Maintainer: Li-Ting Ku <lku@mdanderson.org>
+Description: SpaCCI provides tools for analyzing spatial cell-cell interactions based on ligand-receptor pairs. The package includes functions for local, regional, and global analysis of cell-cell communication using spatial transcriptomics data. It integrates with the CellChat, CellPhoneDB, Cellinker, ICELLNET, and ConnectomeDB database for identifying possible ligand-receptor pairs, visualizes interactions through heat map, chord diagrams, and includes methods for inferring interactions on different spatial scales.
+License: GPL (>= 2)
+Encoding: UTF-8
+Imports: 
+    Rcpp (>= 1.0.13),
+    RcppArmadillo,
+    nnls,
+    ggrepel,
+    pheatmap,
+    circlize (>= 0.4.12),
+    Matrix,
+    Seurat (>= 4.0.0),
+    CellChat,
+    dplyr,
+    patchwork,
+    grDevices,
+    reshape2,
+    graphics
+Depends: 
+    R (>= 3.5.0),
+    Rcpp (>= 1.0.13),
+    RcppArmadillo,
+    nnls,
+    ggrepel,
+    pheatmap,
+    circlize (>= 0.4.12),
+    Matrix,
+    Seurat (>= 4.0.0),
+    CellChat,
+    dplyr,
+    patchwork,
+    grDevices,
+    reshape2,
+    graphics
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo
+RoxygenNote: 7.3.2
