@@ -18,4 +18,6 @@ devtools::install_github("LitingKu/SpaCCI")
 ```
 ---
 
-## Tutorials
+## SpaCCI Tutorials
+- [Simple Tutorials]([https://github.com/LitingKu/SpaCCI/blob/bf1fcc650e5e10f2ed804d7f98c20454e90e7389/SpaCCI_tutorial_files/SpaCCI_tutorial.md]
+---
