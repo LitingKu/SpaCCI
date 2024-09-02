@@ -187,7 +187,7 @@ overall results using heatmap.
     print(p)
 
 ![](SpaCCI/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-8-1.png)
-<img src="[https://github.com/LitingKu/SpaCCI/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-8-1.png](https://github.com/LitingKu/SpaCCI/blob/0a42d561ca86836c630f9b69f3eaee800d7d05a8/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-8-1.png)" width=50% height=50%>
+<img src="https://github.com/LitingKu/SpaCCI/blob/0a42d561ca86836c630f9b69f3eaee800d7d05a8/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-8-1.png" width=50% height=50%>
 
 Then we could plot the chord Diagram by specifying specific
 Ligand-Receptor pair or Pathway name.
