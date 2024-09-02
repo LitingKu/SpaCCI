@@ -28,9 +28,11 @@ A list containing:
 This function identifies possible ligand-receptor (L-R) pairs for cell-cell communication analysis using a subset of the CellChat database. It checks for the presence of all genes involved in each L-R pair within the provided gene expression matrix.
 }
 \examples{
+
+\dontrun{
 data(CellChatDB.human)
 region_matrix <- matrix(data = rnorm(1000), nrow = 100, ncol = 10)
 rownames(region_matrix) <- paste0("Gene", 1:100)
 result <- possible_L_R_pairs_cellchat(CellChatDB.human, region_matrix)
-
+}
 }

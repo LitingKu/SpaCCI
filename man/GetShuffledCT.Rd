@@ -16,8 +16,9 @@ A character vector of the same length as `CellType`, with elements shuffled such
 This function takes a vector of cell types and returns a shuffled version where no element remains in its original position.
 }
 \examples{
+\dontrun{
 original <- c("B_cell", "T_cell", "NK_cell", "Macrophage")
 shuffled <- GetShuffledCT(original)
 print(shuffled)
-
+}
 }

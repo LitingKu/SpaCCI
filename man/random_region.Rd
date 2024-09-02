@@ -20,6 +20,7 @@ A character vector of the `n_ids` closest IDs to the specified center ID.
 This function identifies and returns the IDs of the closest spatial points to a specified center point based on Euclidean distance.
 }
 \examples{
+\dontrun{
 spatial_coord <- data.frame(
   imagecol = c(1, 2, 3, 4, 5),
   imagerow = c(5, 4, 3, 2, 1),
@@ -28,5 +29,5 @@ spatial_coord <- data.frame(
 center_id <- "Spot3"
 closest_ids <- random_region(spatial_coord, center_id, 3)
 print(closest_ids)
-
+}
 }

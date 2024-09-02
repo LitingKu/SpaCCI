@@ -84,10 +84,11 @@ Find_regional_IDs <- function(object,
 #' @return A character vector of the same length as `CellType`, with elements shuffled such that no element remains in its original position.
 #'
 #' @examples
+#' \dontrun{
 #' original <- c("B_cell", "T_cell", "NK_cell", "Macrophage")
 #' shuffled <- GetShuffledCT(original)
 #' print(shuffled)
-#'
+#'}
 #' @export'
 #'
 GetShuffledCT <- function(CellType) {
@@ -112,6 +113,7 @@ GetShuffledCT <- function(CellType) {
 #' @return A character vector of the `n_ids` closest IDs to the specified center ID.
 #'
 #' @examples
+#' \dontrun{
 #' spatial_coord <- data.frame(
 #'   imagecol = c(1, 2, 3, 4, 5),
 #'   imagerow = c(5, 4, 3, 2, 1),
@@ -120,7 +122,7 @@ GetShuffledCT <- function(CellType) {
 #' center_id <- "Spot3"
 #' closest_ids <- random_region(spatial_coord, center_id, 3)
 #' print(closest_ids)
-#'
+#'}
 #' @importFrom dplyr arrange
 #'
 #' @export

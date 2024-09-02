@@ -506,6 +506,7 @@ plot_SpaCCI_heatmap <- function(SpaCCI_Result_List , specific_celltypes = NULL, 
 #' @return A character vector of colors in hexadecimal format.
 #'
 #' @examples
+#' \dontrun{
 #' # Generate a palette with 5 colors
 #' palette <- scPalette(5)
 #' print(palette)
@@ -513,7 +514,7 @@ plot_SpaCCI_heatmap <- function(SpaCCI_Result_List , specific_celltypes = NULL, 
 #' # Generate a palette with 30 colors
 #' large_palette <- scPalette(30)
 #' print(large_palette)
-#'
+#'}
 #' @importFrom grDevices colorRampPalette
 #' @export
 scPalette <- function(n) {
