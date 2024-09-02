@@ -1,7 +1,7 @@
 Package: SpaCCI
 Type: Package
 Title: Spatially Aware Cell-Cell Interaction Analysis
-Version: 1.0
+Version: 1.0.1
 Date: 2024-08-29
 Author: Li-Ting Ku
 Maintainer: Li-Ting Ku <lku@mdanderson.org>
