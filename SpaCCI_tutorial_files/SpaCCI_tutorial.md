@@ -185,6 +185,7 @@ overall results using heatmap.
                         specific_celltypes = c(colnames(cell_prop_df)), alpha = 0.05,
                         main= "Significant Cell-Cell Interaction Count")
     print(p)
+    
 <img src="https://github.com/LitingKu/SpaCCI/blob/0a42d561ca86836c630f9b69f3eaee800d7d05a8/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-8-1.png" width=50% height=50%>
 
 Then we could plot the chord Diagram by specifying specific
@@ -201,7 +202,6 @@ Ligand-Receptor pair or Pathway name.
                              specific_celltypes = c(colnames(cell_prop_df)),
                              L_R_pair_name  = "AREG_EGFR")
 
-![](SpaCCI/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-9-1.png)
 <img src="https://github.com/LitingKu/SpaCCI/blob/0a42d561ca86836c630f9b69f3eaee800d7d05a8/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-9-1.png" width=50% height=50%>
 
     # plot the result with chordDiagram while selecting specific pathway name
@@ -209,7 +209,6 @@ Ligand-Receptor pair or Pathway name.
                       specific_celltypes = c(colnames(cell_prop_df)),
                       pathway_name  = "EGF")
 
-![](SpaCCI/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-9-2.png)
 <img src="https://github.com/LitingKu/SpaCCI/blob/0a42d561ca86836c630f9b69f3eaee800d7d05a8/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-9-2.png" width=50% height=50%>
 
 #### (B) Regional analysis
@@ -234,7 +233,6 @@ Here we run the regional analysis on the whole slide with selected
                         specific_celltypes = c(colnames(cell_prop_df)), alpha = 0.05,
                         main= "Significant Cell-Cell Interaction Count in the Interested Region")
 
-![](SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-10-1.png)
 <img src="https://github.com/LitingKu/SpaCCI/blob/0a42d561ca86836c630f9b69f3eaee800d7d05a8/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-10-1.png" width=50% height=50%>
 
 #### (C) Local analysis
@@ -268,8 +266,7 @@ Then we plot the localized plot to access the local signalling hotspot.
     ## Scale for fill is already present.
     ## Adding another scale for fill, which will replace the existing scale.
 
-![](SpaCCI/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-12-1.png)
-<img src="https://github.com/LitingKu/SpaCCI/blob/0a42d561ca86836c630f9b69f3eaee800d7d05a8/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-12-1.png" width=50% height=50%>
+<img src="https://github.com/LitingKu/SpaCCI/blob/0a42d561ca86836c630f9b69f3eaee800d7d05a8/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-12-1.png" width=30% height=30%>
 
     # if you DON'T have the Seurat Object with image, Please use the spatial_coords_df
     plot_SpaCCI_local(spatial_coordinates_dataframe = spatial_coords_df,
@@ -280,5 +277,4 @@ Then we plot the localized plot to access the local signalling hotspot.
 
     ## [1] "plotting using image spatial coordinates"
 
-![](SpaCCI/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-12-2.png)
-<img src="https://github.com/LitingKu/SpaCCI/blob/0a42d561ca86836c630f9b69f3eaee800d7d05a8/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-12-2.png" width=50% height=50%>
+<img src="https://github.com/LitingKu/SpaCCI/blob/0a42d561ca86836c630f9b69f3eaee800d7d05a8/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-12-2.png" width=30% height=30%>
