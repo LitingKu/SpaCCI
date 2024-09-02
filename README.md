@@ -3,11 +3,19 @@
 </p>
 
 
-# SpaCCI
-## Spatially Aware Cell-Cell Interaction Analysis
+# SpaCCI: Spatially Aware Cell-Cell Interaction Analysis
 
-## Capabilities
+---
+
+## SpaCCI key features
+
+---
 
 ## Installation
+```
+install.packages("devtools")
+devtools::install_github("LitingKu/SpaCCI")
+```
+---
 
 ## Tutorials
