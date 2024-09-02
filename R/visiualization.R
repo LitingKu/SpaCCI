@@ -428,6 +428,7 @@ plot_SpaCCI_heatmap <- function(SpaCCI_Result_List , specific_celltypes = NULL, 
                                 family = "Arial", main = "", treeheight_col = 0, treeheight_row = 0, low_col = "dodgerblue4",
                                 mid_col = "peachpuff", high_col = "deeppink4", alpha = 0.05, return_tables = FALSE,
                                 symmetrical = FALSE, ...) {
+  suppressWarnings({
   requireNamespace("reshape2")
   requireNamespace("grDevices")
 
@@ -489,6 +490,8 @@ plot_SpaCCI_heatmap <- function(SpaCCI_Result_List , specific_celltypes = NULL, 
   } else {
     stop("There are no significant results using p-value of: ", alpha, call. = FALSE)
   }
+
+  })
 
 }
 
@@ -577,6 +580,7 @@ scPalette <- function(n) {
 #'
 #' @export
 plot_SpaCCI_chordDiagram <- function(SpaCCI_Result_List, specific_celltypes = NULL, pathway_name = NULL, L_R_pair_name = NULL, color = NULL, alpha = 0.05) {
+  suppressWarnings({
   all_count <- SpaCCI_Result_List$pvalue_df
 
   if (!is.null(specific_celltypes)) {
@@ -665,6 +669,8 @@ plot_SpaCCI_chordDiagram <- function(SpaCCI_Result_List, specific_celltypes = NU
   } else {
     title("Cell-Cell Interaction")
   }
+
+  })
 }
 
 
