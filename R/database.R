@@ -17,15 +17,20 @@
 #'
 #' @examples
 #' \dontrun{
-#' gene_spot_expression_dataframe <- matrix(data = rnorm(1000), nrow = 100, ncol = 10)
-#' rownames(gene_spot_expression_dataframe) <- paste0("Gene", 1:100) # should match the Human or Mouse gene symbol name
-#' result <- LR_database(species = "Human", database_name = "CellChat", gene_spot_expression_dataframe = gene_spot_expression_dataframe)
+#' gene_spot_expression_dataframe <- matrix(
+#'       data = rnorm(1000), nrow = 100, ncol = 10)
+#' rownames(gene_spot_expression_dataframe) <-
+#'      paste0("Gene", 1:100) # should match the Human or Mouse gene symbol name
+#' result <- LR_database(species = "Human",
+#'             database_name = "CellChat",
+#'             gene_spot_expression_dataframe = gene_spot_expression_dataframe)
 #' }
 #' @export
 #'
 #'
 LR_database <- function(species, database_name, gene_spot_expression_dataframe, percentage = 10){
   if ( database_name %in% c("CellChat","cellchat","Cellchat","cellChat")  ){
+
     dat <- possible_L_R_pairs_cellchat(species, gene_spot_expression_dataframe, percentage)
 
   }else if(species %in% c("Mouse","mouse") & database_name %in% c("CellPhoneDB","CellphoneDB","cellphoneDB","cellPhoneDB") ){
@@ -74,28 +79,30 @@ LR_database <- function(species, database_name, gene_spot_expression_dataframe, 
 #' @examples
 #'
 #' \dontrun{
-#' data(CellChatDB.human)
-#' region_matrix <- matrix(data = rnorm(1000), nrow = 100, ncol = 10)
-#' rownames(region_matrix) <- paste0("Gene", 1:100)
-#' result <- possible_L_R_pairs_cellchat(CellChatDB.human, region_matrix)
-#'}
-#' @importFrom CellChat subsetDB
-#' @importFrom dplyr %>%
+#' gene_spot_expression_dataframe <- matrix(data = rnorm(1000), nrow = 100, ncol = 10)
+#' rownames(gene_spot_expression_dataframe) <- paste0("Gene", 1:100)
+#' result <- possible_L_R_pairs_cellchat(CellChatDB.human,
+#'       gene_spot_expression_dataframe = gene_spot_expression_dataframe)
+#' }
+#' @importFrom dplyr %>% filter select mutate arrange group_by summarise
 #'
 #' @export
 #'
 #'
 possible_L_R_pairs_cellchat <- function(species, gene_spot_expression_dataframe, percentage) {
+  lr_data_path <- system.file("extdata", "CellChatDB.rda", package = "SpaCCI")
+  load(lr_data_path)
+
   if (species %in% c("Human","human") ){
-    CellChatDB <- CellChat::CellChatDB.human
+    CellChatDB <- CellChatDB_human
   }else if (species %in% c("Mouse","mouse") ){
-    CellChatDB <- CellChat::CellChatDB.mouse
+    CellChatDB <- CellChatDB_mouse
   }else{
     stop("Please enter species of either Human or Mouse")
   }
 
-  CellChatDB.use <- subsetDB(CellChatDB, search = "Secreted Signaling", key = "annotation") # use Secreted Signaling
-  DB_inter <- CellChatDB.use[["interaction"]] # all L-R interaction
+  CellChatDB.use <- CellChatDB[["interaction"]]
+  DB_inter <- CellChatDB.use[which(CellChatDB.use$annotation %in% c("Secreted Signaling")),]
 
   # Function to split and trim whitespace
   split_and_trim <- function(x) {
@@ -149,10 +156,11 @@ possible_L_R_pairs_cellchat <- function(species, gene_spot_expression_dataframe,
 #' \dontrun{
 #' gene_spot_expression_dataframe <- matrix(data = rnorm(1000), nrow = 100, ncol = 10)
 #' rownames(gene_spot_expression_dataframe) <- paste0("Gene", 1:100)
-#' result <- possible_L_R_pairs_cellphoneDB(gene_spot_expression_dataframe = gene_spot_expression_dataframe)
-#'}
+#' result <- possible_L_R_pairs_cellphoneDB(
+#'    gene_spot_expression_dataframe = gene_spot_expression_dataframe)
+#' }
 #'
-#' @importFrom dplyr rename
+#' @importFrom dplyr rename %>% filter select mutate arrange group_by summarise
 #' @importFrom utils read.csv
 #'
 #' @export
@@ -216,10 +224,12 @@ possible_L_R_pairs_cellphoneDB <- function(gene_spot_expression_dataframe, perce
 #' \dontrun{
 #' gene_spot_expression_dataframe <- matrix(data = rnorm(1000), nrow = 100, ncol = 10)
 #' rownames(gene_spot_expression_dataframe) <- paste0("Gene", 1:100)
-#' result <- possible_L_R_pairs_Cellinker(species = "Human", gene_spot_expression_dataframe = gene_spot_expression_dataframe)
-#' result <- possible_L_R_pairs_Cellinker(species = "Mouse", gene_spot_expression_dataframe = gene_spot_expression_dataframe)
-#'}
-#' @importFrom dplyr rename
+#' result <- possible_L_R_pairs_Cellinker(species = "Human",
+#'            gene_spot_expression_dataframe = gene_spot_expression_dataframe)
+#' result <- possible_L_R_pairs_Cellinker(species = "Mouse",
+#'            gene_spot_expression_dataframe = gene_spot_expression_dataframe)
+#' }
+#' @importFrom dplyr rename %>% filter select mutate arrange group_by summarise
 #' @importFrom utils read.delim
 #'
 #' @export
@@ -284,8 +294,9 @@ possible_L_R_pairs_Cellinker <- function(species,  gene_spot_expression_datafram
 #' \dontrun{
 #' gene_spot_expression_dataframe <- matrix(data = rnorm(1000), nrow = 100, ncol = 10)
 #' rownames(gene_spot_expression_dataframe) <- paste0("Gene", 1:100)
-#' result <- possible_L_R_pairs_ICELLNET(gene_spot_expression_dataframe = gene_spot_expression_dataframe)
-#'}
+#' result <- possible_L_R_pairs_ICELLNET(
+#'      gene_spot_expression_dataframe = gene_spot_expression_dataframe)
+#' }
 #' @importFrom utils read.csv
 #'
 #' @export

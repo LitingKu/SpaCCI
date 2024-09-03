@@ -34,8 +34,11 @@ plot_localized_Seurat(
 }
 \value{
 The localized plot from the inferred cell-cell interaction on the local scale.
-
-#' @examples
+}
+\description{
+Visualize the inferred cell-cell interaction localized pattern on the tissue image with Seurat_object
+}
+\examples{
 \dontrun{
 # Run localized hotspot plot
 Result <- run_SpaCCI(..., analysis_scale = "local",...)
@@ -46,7 +49,5 @@ local_plot <- plot_localized_Seurat(Seurat_object = gene_spot_df,
                                     celltype_receptor = "T_ells",
                                     plot_size = 3)
 }
-}
-\description{
-Visualize the inferred cell-cell interaction localized pattern on the tissue image with Seurat_object
+
 }

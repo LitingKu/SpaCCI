@@ -1,34 +1,31 @@
 \name{SpaCCI-package}
 \alias{SpaCCI-package}
-\alias{SpaCCI}
 \docType{package}
-\title{
-  A short title line describing what the package does
-}
+\title{SpaCCI: Spatially Aware Cell-Cell Interaction Analysis}
 \description{
-  A more detailed description of what the package does. A length
-  of about one to five lines is recommended.
-}
-\details{
-  This section should provide a more detailed overview of how to use the
-  package, including the most important functions.
+  Provides tools for analyzing spatial cell-cell interactions based on ligand-receptor pairs.
+  Functions include local, regional, and global analysis using spatial transcriptomics data.
 }
 \author{
-Your Name, email optional.
-
-Maintainer: Your Name <your@email.com>
+  Li-Ting Ku
+  Maintainer: Li-Ting Ku <lku@mdanderson.org>
 }
 \references{
-  This optional section can contain literature or other references for
-  background information.
+  Some references that are relevant to the methods used in the package.
+  - Author1 et al. (Year). Title of the paper. Journal Name, Volume(Issue), Pages.
 }
-\keyword{ package }
 \seealso{
-  Optional links to other man pages
+  \code{\link{LR_database}}, \code{\link{run_SpaCCI}}
 }
 \examples{
-  \dontrun{
-     ## Optional simple examples of the most important functions
-     ## These can be in \dontrun{} and \donttest{} blocks.   
-  }
+\dontrun{
+  # Example of how to use the main functions
+  result <- LR_database(
+    species = "Human",
+    database_name = "CellChat",
+    gene_spot_expression_dataframe = gene_spot_expression_dataframe
+  )
 }
+}
+
+

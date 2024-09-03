@@ -89,12 +89,12 @@ plot_SpaCCI_local <- function(Seurat_Object = NULL,
 #' @param alpha This is the significant cutoff for the adjusted-p-value of thr permutation test. Initially this is set to \code{0.05}, one could adjust the cutoff.
 #'
 #' @importFrom Seurat SpatialFeaturePlot
-#' @importFrom ggplot2 scale_fill_gradient2
-#' @importFrom dplyr filter select mutate
+#' @importFrom ggplot2 ggplot aes geom_point scale_color_gradient2 labs xlim ylim theme element_blank element_text element_rect margin unit
+#' @importFrom dplyr %>% filter select mutate arrange group_by summarise
 #'
 #' @return The localized plot from the inferred cell-cell interaction on the local scale.
 #'
-#' #' @examples
+#' @examples
 #' \dontrun{
 #' # Run localized hotspot plot
 #' Result <- run_SpaCCI(..., analysis_scale = "local",...)
@@ -216,8 +216,8 @@ plot_localized_Seurat <- function(Seurat_object,
 #' @param L_R_pair_name Initially this is set to \code{NULL}, if one is interested in a specific Ligand-Receptor pair, then one could specify the L_R_pair_name here. Note: the input name should match the L-R pair name exists in the dataframe in the output of SpaCCI_local "dataframelist".
 #' @param alpha This is the significant cutoff for the adjusted-p-value of thr permutation test. Initially this is set to \code{0.05}, one could adjust the cutoff.
 #'
-#' @importFrom ggplot2 ggplot aes geom_point scale_color_gradient2 labs theme
-#' @importFrom dplyr filter select mutate
+#' @importFrom ggplot2 ggplot aes geom_point scale_color_gradient2 labs xlim ylim theme element_blank element_text element_rect margin unit
+#' @importFrom dplyr %>% filter select mutate arrange group_by summarise
 #'
 #' @return The localized plot from the inferred cell-cell interaction on the local scale.
 #'
@@ -372,7 +372,7 @@ plot_localized <- function(spatial_coord,
 #' @param ... Additional arguments passed to `pheatmap`.
 #'
 #' @importFrom pheatmap pheatmap
-#' @importFrom dplyr filter group_by summarise left_join
+#' @importFrom dplyr %>% filter group_by summarise left_join
 #' @importFrom reshape2 acast
 #' @importFrom grDevices colorRampPalette
 #' @importFrom stats setNames
@@ -477,7 +477,7 @@ plot_SpaCCI_heatmap <- function(SpaCCI_Result_List , specific_celltypes = NULL, 
       count_mat <- log1p(count_mat)
     }
 
-    p <- pheatmap(count_mat, show_rownames = show_rownames, show_colnames = show_colnames,
+    p <- pheatmap::pheatmap(count_mat, show_rownames = show_rownames, show_colnames = show_colnames,
                   scale = scale, cluster_cols = cluster_cols, border_color = border_color,
                   cluster_rows = cluster_rows, fontsize_row = fontsize_row, fontsize_col = fontsize_col,
                   main = main, treeheight_row = treeheight_row, family = family, color = col.heatmap,
@@ -542,7 +542,7 @@ scPalette <- function(n) {
 #' @param alpha A numeric value specifying the significance threshold for adjusted P-values. Initially, set to \code{0.05}.
 #'
 #' @return A chord diagram plot visualizing the significant cell-cell interactions.
-#'
+#' @importFrom dplyr %>% filter group_by summarise
 #' @examples
 #' \dontrun{
 #'
@@ -652,7 +652,7 @@ plot_SpaCCI_chordDiagram <- function(SpaCCI_Result_List, specific_celltypes = NU
                    value = as.vector(mat),
                    stringsAsFactors = FALSE)
 
-  chordDiagram(df, annotationTrack = c("name", "grid"),
+  circlize::chordDiagram(df, annotationTrack = c("name", "grid"),
                grid.col = colors,
                link.arr.type = "big.arrow",
                link.arr.length = 0.08,

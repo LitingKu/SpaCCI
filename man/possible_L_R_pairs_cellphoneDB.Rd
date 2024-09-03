@@ -25,7 +25,8 @@ CellPhone Database: This function identifies possible ligand-receptor (L-R) pair
 \dontrun{
 gene_spot_expression_dataframe <- matrix(data = rnorm(1000), nrow = 100, ncol = 10)
 rownames(gene_spot_expression_dataframe) <- paste0("Gene", 1:100)
-result <- possible_L_R_pairs_cellphoneDB(gene_spot_expression_dataframe = gene_spot_expression_dataframe)
+result <- possible_L_R_pairs_cellphoneDB(
+   gene_spot_expression_dataframe = gene_spot_expression_dataframe)
 }
 
 }

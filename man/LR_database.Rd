@@ -32,8 +32,12 @@ This function identifies possible ligand-receptor (L-R) pairs for cell-cell comm
 }
 \examples{
 \dontrun{
-gene_spot_expression_dataframe <- matrix(data = rnorm(1000), nrow = 100, ncol = 10)
-rownames(gene_spot_expression_dataframe) <- paste0("Gene", 1:100) # should match the Human or Mouse gene symbol name
-result <- LR_database(species = "Human", database_name = "CellChat", gene_spot_expression_dataframe = gene_spot_expression_dataframe)
+gene_spot_expression_dataframe <- matrix(
+      data = rnorm(1000), nrow = 100, ncol = 10)
+rownames(gene_spot_expression_dataframe) <-
+     paste0("Gene", 1:100) # should match the Human or Mouse gene symbol name
+result <- LR_database(species = "Human",
+            database_name = "CellChat",
+            gene_spot_expression_dataframe = gene_spot_expression_dataframe)
 }
 }
