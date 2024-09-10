@@ -2,7 +2,7 @@ main:
   - title: "About"
     url: "/about/"
   - title: "Data Download"
-    url: "/data_download/"  # External link to GitHub
+    url: "/datas/data_download/"  # External link to GitHub
   - title: "Tutorial"
     url: "/docs/tutorial1/"  # External link to GitHub
   - title: "Installation"
@@ -37,4 +37,4 @@ datas:
   - title: "Get Started"
     children:
       - title: "Data Download"
-        url: /data_download/
+        url: /datas/data_download/
