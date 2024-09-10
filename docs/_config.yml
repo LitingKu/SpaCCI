@@ -34,6 +34,9 @@ collections:
   docs:
     output: true
     permalink: /:collection/:path/
+  datas:
+    output: true
+    permalink: /:collection/:path/
 
 
 assets:
