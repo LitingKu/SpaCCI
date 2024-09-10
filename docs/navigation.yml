@@ -1,0 +1,7 @@
+navigation:
+  - title: "Home"
+    url: "/"  # The homepage
+  - title: "About"
+    url: "/SpaCCI/documentation/01-about/"  # Adjust for the baseurl
+  - title: "GitHub"
+    url: "https://github.com/LitingKu/SpaCCI"  # External link to GitHub
