@@ -38,14 +38,6 @@ search: false
   background: #83c5be !important; /* Change hover underline color */
 }
 
-a[title="GitHub"]::before {
-  content: url('https://raw.githubusercontent.com/LitingKu/SpaCCI/main/docs/github-logo.svg');
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 5px;
-  width: 60px; /* Adjust size */
-  height: 60px; /* Adjust size */
-}
 
 
 /* Font and color for the sidebar links */
