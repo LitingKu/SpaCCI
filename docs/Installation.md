@@ -9,23 +9,23 @@ header:
   overlay_filter: 0.5  # Adjust the darkness of the image
 ---
 
-<span style="color:#94C47D;">SpaCCI</span> R package can be installed from GitHub using the following steps::  
+<span style="font-family: 'ABeeZee', sans-serif; color: #94C47D;">SpaCCI</span> R package can be installed from GitHub using the following steps:
+
+## Dependencies
+
+- R version (>= 3.5.0)
+- R packages: Rcpp (>= 1.0.13), RcppArmadillo, nnls, ggrepel, pheatmap, circlize (>= 0.4.12), Matrix, Seurat (>= 4.0.0), dplyr, patchwork, grDevices, reshape2, graphics, ggplot2
 
 
-## (C) Local analysis
+### 1. Install devtools
 
-    ## [1] "writing data frame"
+    if (!requireNamespace("devtools", quietly = TRUE)) {
+         install.packages("devtools")
+    }
 
-    # plot the result heatmap
-    plot_SpaCCI_heatmap(SpaCCI_Result_List = result_regional,
-                        symmetrical = FALSE, cluster_cols = FALSE, return_tables = FALSE,
-                        cluster_rows = FALSE, cellheight = 15, cellwidth = 15,
-                        specific_celltypes = c(colnames(cell_prop_df)), alpha = 0.05,
-                        main= "Significant Cell-Cell Interaction Count in the Interested Region")
 
-![](SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-10-1.png)
 
-#### (C) Local analysis
+### 2. Install <span style="font-family: 'ABeeZee', sans-serif; color: #94C47D;">SpaCCI</span> 
 
 Finally we run the local analysis on the whole slide with specifying
 `specific_LR_pair`.
