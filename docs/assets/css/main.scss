@@ -24,18 +24,13 @@ search: false
   font-family: 'ABeeZee', sans-serif !important;
 }
 
-.masthead {
-  border-bottom: 2px solid #83c5be; /* Custom border */
-}
 
-
-.masthead_menu .site-nav {
+header.masthead .site-nav .nav__link {
   font-family: 'Roboto', sans-serif !important;
-  color: #83c5be !important; /* Navigation link color */
+  color: #83c5be !important;
 }
 
-.masthead .site-nav .nav__link:hover {
-  color: #FF9800 !important; /* Hover state */
+header.masthead .site-nav .nav__link:hover {
+  color: #FF9800 !important;
 }
-
 
