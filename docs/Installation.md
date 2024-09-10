@@ -1,4 +1,8 @@
-
+---
+title: "Installation"
+layout: splash
+permalink: /installation/
+---
 
 
     ## [1] "writing data frame"
