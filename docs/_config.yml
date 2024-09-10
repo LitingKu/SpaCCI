@@ -25,7 +25,11 @@ defaults:
       toc: true
       sidebar:
         nav: "docs"
-
+        
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:path/
 
 
 assets:
