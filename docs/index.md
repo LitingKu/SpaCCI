@@ -1,9 +1,9 @@
 <p align="center">
-  <img width="1000"  src="SPACCI%20Method%20Diagram.png">
+  <img width="1000"  src="SPACCI Method Diagram.png">
 </p>
 
 
-# SpaCCI: Spatially Aware Cell-Cell Interaction Analysis
+# SpaCCI Overview
 
 ---
 
