@@ -1,11 +1,16 @@
 ---
 layout: splash
 title: "About"
-permalink: /docs/about/
+permalink: /about/
 header:
-  overlay_color: "#333"
-  overlay_image: <https://github.com/LitingKu/SpaCCI/blob/6a045e98b1038802c7b6ddb48bfc0ff4a18ba3fe/docs/cover.jpg>  # Path to your cover image
-  overlay_filter: 0.5  # Adjust the darkness of the image
+  overlay_image: /assets/images/cover.jpg  # Path to your cover image
+  overlay_filter: 0.5  # Adjust the opacity of the overlay (0 to 1)
+  overlay_color: "#333"  # Optional: Add an overlay color on top of the image
+  caption: "About SpaCCI"
+  actions:
+    - label: "Get Started"
+      url: "/tutorial/"
+      class: "btn btn--primary"
 ---
 
 ## SpaCCI key features
