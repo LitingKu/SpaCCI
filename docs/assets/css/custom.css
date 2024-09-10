@@ -1,0 +1,34 @@
+/* Import multiple Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee&family=Roboto&family=Open+Sans&display=swap');
+
+/* Change the color and font of the site title (SpaCCI) */
+.site-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  color: #d0f4de; /* Change this color */
+}
+
+/* Change the color and font of the navigation links (e.g., About, Tutorial) */
+.nav a {
+  font-family: 'Roboto', sans-serif;
+  color: #d0f4de; /* Change this color */
+}
+
+/* Change the color of the navigation links on hover */
+.nav a:hover {
+  color: #d0f4de; /* Change this to your hover color */
+}
+
+/* Change the color and font of the page title (e.g., Welcome to SpaCCI) */
+.page-title {
+  font-family: 'ABeeZee', sans-serif;
+  font-weight: normal;
+  font-size: 3rem;  /* Adjust size as needed */
+  color: #2196F3;  /* Change this color to your preferred one */
+}
+
+/* Apply Open Sans to the entire site */
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: #333;  /* Global text color */
+}
