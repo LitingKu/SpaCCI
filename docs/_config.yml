@@ -1,3 +1,9 @@
 remote_theme: pages-themes/cayman@v0.2.0
+name: SpaCCI
+project:
+  version: 1.0.0
+  download_url: https://github.com/LitingKu/SpaCCI/
+  download_text: Download
+  
 plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
