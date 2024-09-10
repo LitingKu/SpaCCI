@@ -1,8 +1,7 @@
 ---
 layout: splash
-homepage: true
 title: "About"
-permalink: /about/
+permalink: /docs/about/
 header:
   overlay_color: "#333"
   overlay_image: cover.jpg  # Path to your cover image
