@@ -9,6 +9,7 @@ header:
   overlay_filter: 0.5  # Adjust the darkness of the image
 ---
 
+
 ## SpaCCI key features
 ---
 - **Integration of Multiple Ligand-Receptor Databases**: SpaCCI leverages widely used ligand-receptor interaction databases, including CellChat, CellPhoneDB, Cellinker, ICELLNET, and ConnectomeDB, for both human and mouse species. This ensures comprehensive coverage and accuracy in identifying potential cell-cell interactions.
