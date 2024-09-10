@@ -5,8 +5,8 @@ search: false
 
 @charset "utf-8";
 
-$link-color: #83c5be !important; 
-$global-font-family: 'Open Sans', sans-serif !important; /* Change the global font */
+$link-color: #83c5be !default; 
+$global-font-family: 'Open Sans', sans-serif !default; /* Change the global font */
 
 /* Import Minimal Mistakes theme core styles */
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
