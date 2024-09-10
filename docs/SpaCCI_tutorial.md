@@ -1,5 +1,5 @@
 ---
-layout: splash
+layout: wide
 title: "Tutorial"
 permalink: /tutorial/
 header:
