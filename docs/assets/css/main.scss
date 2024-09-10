@@ -39,19 +39,19 @@ search: false
 
 
 /* Font and color for the sidebar links */
-.sidebar .nav__list a {
+.sidebar .nav__list  {
   font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
 }
 
-.sidebar .nav__title a {
+.sidebar .nav__title  {
   font-weight: bold;
   font-size: 1.25rem;
   padding: 0.5rem 0;
 }
 
 .sidebar .nav__items a {
-  color: #555;
+  color: #83c5be !important;
   padding: 0.25rem 0;
 }
 
