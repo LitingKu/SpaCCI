@@ -1,12 +1,9 @@
-remote_theme: "mmistakes/minimal-mistakes@4.26.2" # Use the remote theme method
-
-# Site settings
 title: "SpaCCI"
 description: "Spatially Aware Cell-Cell Interaction Anaylsis"
 baseurl: "/SpaCCI" # You might need to set this based on your site structure
 url: "https://litingku.github.io/" # Your GitHub Pages URL
 
-# Other possible settings for the theme
+theme: minimal-mistakes-jekyll  # Gem-based theme setup
 plugins:
   - jekyll-include-cache
 
