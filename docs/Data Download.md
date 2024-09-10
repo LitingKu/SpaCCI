@@ -26,11 +26,11 @@ After loading `Tutorial_example_data.rda`, the following objects should be avail
 ## 2. Non Seurat Data for Tutorial
 For NOT using the Seurat object, please also first download the following data file. 
 
-- **<a href="https://github.com/LitingKu/SpaCCI/blob/main/SpaCCI_tutorial_files/data/normalized_gene_spot_df.csv" style="color: #83c5be;">Gene Expression Data**: A spot-level data frame with genes as row
+- **<a href="https://github.com/LitingKu/SpaCCI/blob/main/SpaCCI_tutorial_files/data/normalized_gene_spot_df.csv" style="color: #83c5be;"> Gene Expression Data</a>**: A spot-level data frame with genes as row
     names and spot IDs as column names.
-- **<a href="https://github.com/LitingKu/SpaCCI/blob/main/SpaCCI_tutorial_files/data/cell_prop_df.csv" style="color: #83c5be;">Cell Type Proportion Data**: A spot-level data frame with spot IDs
+- **<a href="https://github.com/LitingKu/SpaCCI/blob/main/SpaCCI_tutorial_files/data/cell_prop_df.csv" style="color: #83c5be;">Cell Type Proportion Data</a>**: A spot-level data frame with spot IDs
     as row names and cell type labels as column names.
-- **<a href="https://github.com/LitingKu/SpaCCI/blob/main/SpaCCI_tutorial_files/data/spatial_coords_df.csv" style="color: #83c5be;">Spatial Coordinates** : A spot-level data frame with spot IDs as row names and `c("imagerow","imagecol")` as column names.
+- **<a href="https://github.com/LitingKu/SpaCCI/blob/main/SpaCCI_tutorial_files/data/spatial_coords_df.csv" style="color: #83c5be;">Spatial Coordinates</a>** : A spot-level data frame with spot IDs as row names and `c("imagerow","imagecol")` as column names.
 
 For regional analysis, please also load the data as following to obtain the `interest_region_Spot_IDs`:
 
