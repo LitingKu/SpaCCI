@@ -1,7 +1,7 @@
 ---
 layout: splash
 homepage: true
-title: "Welcome to SpaCCI"
+title: "Spatially Aware Cell-Cell Interaction Analysis"
 subtitle: "Spatially Aware Cell-Cell Interaction Analysis"
 header:
   overlay_color: "#333"
