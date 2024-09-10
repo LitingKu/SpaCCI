@@ -39,12 +39,12 @@ search: false
 
 
 /* Font and color for the sidebar links */
-.sidebar .nav__list {
+.sidebar .nav__list a {
   font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
 }
 
-.sidebar .nav__title {
+.sidebar .nav__title a {
   font-weight: bold;
   font-size: 1.25rem;
   padding: 0.5rem 0;
@@ -57,5 +57,5 @@ search: false
 
 .sidebar .nav__items a:hover {
   text-decoration: underline;
-  color: #333;
+  color: #83c5be !important;
 }
