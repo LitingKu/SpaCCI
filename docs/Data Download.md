@@ -32,3 +32,14 @@ For NOT using the Seurat object, please also first download the following data f
     as row names and cell type labels as column names.
 - **<a href="https://github.com/LitingKu/SpaCCI/blob/main/SpaCCI_tutorial_files/data/spatial_coords_df.csv" style="color: #83c5be;">Spatial Coordinates** : A spot-level data frame with spot IDs as row names and `c("imagerow","imagecol")` as column names.
 
+For regional analysis, please also load the data as following to obtain the `interest_region_Spot_IDs`:
+
+    library(SpaCCI)
+    # Load the tutorial data
+    load(system.file("extdata", "Tutorial_example_data.rda", package = "SpaCCI"))
+
+
+
+
+    
+
