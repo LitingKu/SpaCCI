@@ -1,5 +1,5 @@
 ---
-layout: splash
+layout: single
 homepage: true
 title: "Welcome to SpaCCI"
 subtitle: "Spatially Aware Cell-Cell Interaction Analysis"
