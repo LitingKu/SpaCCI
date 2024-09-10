@@ -4,7 +4,7 @@ main:
   - title: "Example Data Download"
     url: "/"  # External link to GitHub
   - title: "Tutorial"
-    url: "/"  # External link to GitHub
+    url: "/tutorial/"  # External link to GitHub
   - title: "Installation"
     url: "/"  # External link to GitHub
   - title: "GitHub"
