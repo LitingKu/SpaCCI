@@ -39,7 +39,7 @@ search: false
 }
 
 a[title="GitHub"]::before {
-  content: url("/assets/images/github-logo.svg") !important;
+  content: url("https://github.com/LitingKu/SpaCCI/blob/f9d23d0e4a7680c51073380fcd3027db8a1f016b/docs/assets/images/github-logo.svg") !important;
   display: inline-block;
   vertical-align: middle;
   margin-right: 5px;
