@@ -5,6 +5,9 @@ search: false
 
 @charset "utf-8";
 
+$link-color: #83c5be; 
+$global-font-family: 'Open Sans', sans-serif; /* Change the global font */
+
 /* Import Minimal Mistakes theme core styles */
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
@@ -14,30 +17,19 @@ search: false
 
 /* Apply ABeeZee to the site title (top left corner) */
 .site-title {
-  font-family: 'ABeeZee', sans-serif;
+  font-family: 'ABeeZee', sans-serif !important;
   font-weight: bold;
   color: #83c5be !important; /* Change this color */
 }
 
-/* Apply Roboto to the navigation links (About, Tutorial, etc.) */
+/* Apply Roboto to navigation links */
 .site-nav a {
   font-family: 'Roboto', sans-serif !important;
-  color: #83c5be !important; /* Change this color */
+  color: $link-color !important;
 }
 
-.site-nav a:hover {
-  color: #FF9800 !important; /* Change this to your hover color */
-}
-
-/* Apply Open Sans to the page title (e.g., Welcome to SpaCCI) */
-.page-header h1,
+/* Apply ABeeZee to page titles */
 .page-title {
   font-family: 'ABeeZee', sans-serif !important;
-  color: #2196F3 !important;  /* Change this color */
-}
-
-/* Apply Open Sans to the entire body */
-body {
-  font-family: 'Open Sans', sans-serif !important;
-  color: #333 !important;  /* Global text color */
+  color: #2196F3 !important;
 }
