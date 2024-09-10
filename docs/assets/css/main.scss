@@ -38,6 +38,15 @@ search: false
   background: #83c5be !important; /* Change hover underline color */
 }
 
+.nav a[title="GitHub"] svg {
+  fill: #38a3a5; /* Apply color */
+  width: 24px;
+  height: 24px;
+}
+
+.nav a[title="GitHub"]:hover svg {
+  fill: #83c5be; /* Hover color */
+}
 
 /* Font and color for the sidebar links */
 .sidebar .nav__list  {
