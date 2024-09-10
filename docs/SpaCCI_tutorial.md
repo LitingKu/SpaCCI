@@ -1,3 +1,15 @@
+---
+layout: splash
+title: "Tutorial"
+permalink: /tutorial/
+header:
+  overlay_color: "#333"
+  overlay_image: cover.jpg  # Path to your cover image
+  overlay_filter: 0.5  # Adjust the darkness of the image
+---
+
+
+
 ## Introduction
 
 This tutorial demonstrates how to use the SpaCCI package for analyzing
