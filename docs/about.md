@@ -10,7 +10,7 @@ header:
 ---
 
 
-## SpaCCI key features
+## <span style="font-family: 'ABeeZee', sans-serif; color: #94C47D;">SpaCCI</span> key features
 ---
 - **Integration of Multiple Ligand-Receptor Databases**: SpaCCI leverages widely used ligand-receptor interaction databases, including CellChat, CellPhoneDB, Cellinker, ICELLNET, and ConnectomeDB, for both human and mouse species. This ensures comprehensive coverage and accuracy in identifying potential cell-cell interactions.
 - **Spatial Awareness**: Unlike traditional methods, SpaCCI incorporates spatial information from ST platforms like 10x Visium. This allows for more accurate detection of cell-cell interactions by considering the physical proximity of cells and the spatial distribution of cell types across tissue samples.
