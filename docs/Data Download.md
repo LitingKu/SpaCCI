@@ -1,7 +1,7 @@
 ---
 title: "Data Download"
 layout: single
-permalink: /data_download/
+permalink: /datas/data_download/
 toc: true
 toc_sticky: true
 sidebar:
