@@ -39,7 +39,7 @@ For regional analysis, please also load the data as following to obtain the `int
     load(system.file("extdata", "Tutorial_example_data.rda", package = "SpaCCI"))
 
 
-## 2. Real 10X Visium Data
+## 3. Real 10X Visium Data
 
 
 
