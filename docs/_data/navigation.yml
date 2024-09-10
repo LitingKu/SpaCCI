@@ -1,6 +1,6 @@
 main:
   - title: "About"
-    url: "/main/documentation/01-about/"  
+    url: permalink: /about/ 
   - title: "Example Data Download"
     url: "/"  # External link to GitHub
   - title: "Tutorial"
