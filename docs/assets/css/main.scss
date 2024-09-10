@@ -38,15 +38,7 @@ search: false
   background: #83c5be !important; /* Change hover underline color */
 }
 
-a[title="GitHub"] {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  background-image: url("https://github.com/LitingKu/SpaCCI/blob/f9d23d0e4a7680c51073380fcd3027db8a1f016b/docs/assets/images/github-logo.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  color: #38a3a5 !important;
-}
+
 
 /* Font and color for the sidebar links */
 .sidebar .nav__list  {
