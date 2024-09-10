@@ -3,7 +3,7 @@ title: "SpaCCI"
 description: "Spatially Aware Cell-Cell Interaction Anaylsis"
 baseurl: "/SpaCCI" # You might need to set this based on your site structure
 url: "https://litingku.github.io" # Your GitHub Pages URL
-
+enable_copy_code_button: true
 plugins:
   - jekyll-include-cache
 
