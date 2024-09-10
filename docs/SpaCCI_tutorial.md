@@ -5,10 +5,6 @@ classes: wide
 toc: true
 toc_label: "Included Layouts"
 toc_icon: "columns"
-header:
-  overlay_color: "#333"
-  overlay_image: cover.jpg  # Path to your cover image
-  overlay_filter: 0.5  # Adjust the darkness of the image
 ---
 
 
