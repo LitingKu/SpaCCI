@@ -38,6 +38,25 @@ search: false
   background: #83c5be !important; /* Change hover underline color */
 }
 
+/* Font and color for the GitHub */
+a[title="GitHub"]::before {
+  content: url("https://raw.githubusercontent.com/LitingKu/SpaCCI/main/docs/github-logo.svg") !important;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 20px !important; /* Adjust size */
+  height: 20px !important; /* Adjust size */
+}
+
+a[title="GitHub"] {
+  font-family: 'ABeeZee', sans-serif !important;
+  color: #38a3a5 !important;
+  font-size: 1.2rem !important;
+}
+
+a[title="GitHub"]:hover::before {
+  background: #83c5be !important; /* Change hover underline color */
+}
 
 
 /* Font and color for the sidebar links */
