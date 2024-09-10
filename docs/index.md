@@ -3,7 +3,7 @@ layout: splash
 title: "Welcome to SpaCCI"
 header:
   overlay_color: "#333"
-  overlay_image: /docs/cover.jpg  # Path to your cover image
+  overlay_image: cover.jpg  # Path to your cover image
   overlay_filter: 0.5  # Adjust the darkness of the image
   caption: "SpaCCI: Spatially Aware Cell-Cell Interaction Analysis"
 ---
