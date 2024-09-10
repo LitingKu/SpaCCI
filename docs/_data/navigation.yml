@@ -16,15 +16,15 @@ docs:
   - title: Get Started
     children:
       - title: "Load Data"
-        url: /tutorial/
+        url: /docs/tutorial/
   - title: Analysis
     children:
       - title: "Using Seurat Object"
-        url: /tutorial/
+        url: /docs/tutorial/
       - title: "Without using Seurat Object"
-        url: /tutorial2/
+        url: /docs/tutorial2/
   - title: Example Analysis
     children:
       - title: "IPMN sample"
-        url: /tutorial/
+        url: /docs/tutorial/
 
