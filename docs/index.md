@@ -9,7 +9,7 @@ header:
   overlay_filter: 0.3  # Adjust the darkness of the image
 ---
 
-## SpaCCI Overview
+## <span style="font-family: 'ABeeZee', sans-serif; color: #94C47D;">SpaCCI</span> Overview
 
 <p align="center">
   <img width="1000" src="SPACCI Method Diagram.png" alt="SpaCCI Method Diagram">
