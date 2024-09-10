@@ -1,6 +1,7 @@
 ---
 title: "Tutorial"
 permalink: /tutorial/
+classes: wide
 toc: true
 toc_label: "Included Layouts"
 toc_icon: "columns"
