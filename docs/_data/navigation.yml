@@ -9,7 +9,7 @@ main:
     url: "/installation/"  # External link to GitHub
   - title: "GitHub"
     url: "https://github.com/LitingKu/SpaCCI"  # External link to GitHub
-    icon: "/assets/images/github_logo.png"
+    icon: "/assets/images/github-logo.svg"
 
 
 # documentation links
