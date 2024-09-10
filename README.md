@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="1000"  src="https://github.com/LitingKu/SpaCCI/blob/main/SPACCI%20Method%20Diagram.png">
+  <img width="1000"  src="SPACCI Method Diagram.png">
 </p>
 
 
