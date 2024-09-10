@@ -38,16 +38,14 @@ search: false
   background: #83c5be !important; /* Change hover underline color */
 }
 
-a[title="GitHub"]::before {
-  content: url("https://github.com/LitingKu/SpaCCI/blob/f9d23d0e4a7680c51073380fcd3027db8a1f016b/docs/assets/images/github-logo.svg") !important;
+a[title="GitHub"] {
   display: inline-block;
-  vertical-align: middle;
-  margin-right: 5px;
-  color: #38a3a5 !important; /* Same color as your text */
-}
-
-a[title="GitHub"]:hover::before {
-  background-color: #83c5be !important; /* Hover effect */
+  width: 24px;
+  height: 24px;
+  background-image: url("https://github.com/LitingKu/SpaCCI/blob/f9d23d0e4a7680c51073380fcd3027db8a1f016b/docs/assets/images/github-logo.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: #38a3a5 !important;
 }
 
 /* Font and color for the sidebar links */
