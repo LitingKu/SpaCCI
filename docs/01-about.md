@@ -7,10 +7,10 @@ header:
   overlay_color: "#333"
   overlay_image: cover.jpg  # Path to your cover image
   overlay_filter: 0.5  # Adjust the darkness of the image
- actions:
-    - label: "Get Started"
-      url: "/tutorial/"
-      class: "btn btn--primary"
+actions:
+  - label: "Get Started"
+    url: "/tutorial/"
+    class: "btn btn--primary"
 ---
 
 ## SpaCCI key features
