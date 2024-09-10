@@ -14,6 +14,13 @@ search: false
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee&family=Roboto&family=Open+Sans&display=swap');
 
+/* Target the title on pages with the single layout */
+.page-header .page-title {
+  font-size: 2.5rem; /* Adjust the size as needed */
+  font-weight: bold; /* Optional: Make the title bold */
+}
+
+
 /* Apply ABeeZee to the site title (top left corner) */
 .site-title {
   font-family: 'ABeeZee', sans-serif !important;
