@@ -13,7 +13,7 @@ plugins:
 # Optional navigation links (you can add more)
 navigation:
   - title: "Home"
-    url: "/index/"
+    url: "/"
   - title: "About"
     url: "/about/"
 
