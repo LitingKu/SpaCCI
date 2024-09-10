@@ -10,6 +10,15 @@ search: false
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
+.home .page-header {
+  height: 400px; /* Set desired height for homepage header */
+}
+
+/* Default height for other pages */
+.page-header {
+  height: 200px; /* Set smaller height for other pages */
+}
+
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee&family=Roboto&family=Open+Sans&display=swap');
 
