@@ -2,8 +2,16 @@
 title: "Installation"
 layout: splash
 permalink: /installation/
+header:
+  overlay_color: "#333"
+  overlay_image: cover.jpg  # Path to your cover image
+  overlay_filter: 0.5  # Adjust the darkness of the image
 ---
 
+SpaCCI is available as an R package, which can be installed from GitHub by:  
+<span style="color:red;">SpaCCI</span> is the tool's name.
+
+## (C) Local analysis
 
     ## [1] "writing data frame"
 
