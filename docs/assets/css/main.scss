@@ -24,13 +24,22 @@ search: false
   font-family: 'ABeeZee', sans-serif !important;
 }
 
-.greedy-nav {
-  font-family: 'Roboto', sans-serif !important;
-  color: #83c5be !important;
+.masthead {
+  border-bottom: 2px solid #83c5be; /* Custom border */
 }
 
-.greedy-nav .visible-links:hover {
-  color: #FF9800 !important;
+.masthead .site-title {
+  font-family: 'ABeeZee', sans-serif !important;
+  color: #ff5722 !important; /* Custom color for the site title */
+}
+
+.masthead .site-nav .nav__link {
+  font-family: 'Roboto', sans-serif !important;
+  color: #83c5be !important; /* Navigation link color */
+}
+
+.masthead .site-nav .nav__link:hover {
+  color: #FF9800 !important; /* Hover state */
 }
 
 
