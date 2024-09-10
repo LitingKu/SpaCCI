@@ -2,8 +2,8 @@
 title: "Tutorial"
 permalink: /tutorial/
 toc: true
-toc_label: "Included Layouts"
-toc_icon: "columns"
+toc_label: "On this page"
+toc_icon: "cog"
 enable_copy_code_button: true
 breadcrumbs: true
 ---
