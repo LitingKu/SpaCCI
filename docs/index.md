@@ -21,5 +21,6 @@ header:
 - **Cell Type Mixture Modeling**: SpaCCI acknowledges the mixture of cell types within each spot of the tissue sample. It uses non-negative least square regression combined with cell type proportion data to estimate cell type-specific gene expression, offering a more accurate quantification of interactions.
 - **Global, Regional, and Local Interaction Quantification**: The framework is designed to analyze cell-cell interactions at local, regional, and global scales. By borrowing information from neighboring spots, SpaCCI provides a detailed view of interaction patterns within and across different regions of the tissue.
 
+[about](about.md) 
 
 
