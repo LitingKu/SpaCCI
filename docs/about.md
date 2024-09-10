@@ -5,8 +5,8 @@ permalink: /about/
 subtitle: "Spatially Aware Cell-Cell Interaction Analysis"
 header:
   overlay_color: "#333"
-  overlay_image: cover.jpg  # Path to your cover image
-  overlay_filter: 0.5  # Adjust the darkness of the image
+  overlay_image: cover2.jpg  # Path to your cover image
+  overlay_filter: 0.2  # Adjust the darkness of the image
 ---
 
 
