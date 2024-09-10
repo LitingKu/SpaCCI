@@ -10,13 +10,14 @@ search: false
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
-.home .page-header {
-  height: 400px; /* Set desired height for homepage header */
+/* Target only the homepage splash */
+body.homepage .page-header {
+  height: 500px !important; /* Larger height for homepage */
 }
 
-/* Default height for other pages */
-.page-header {
-  height: 200px; /* Set smaller height for other pages */
+/* Default splash header for other pages */
+body.layout-splash .page-header {
+  height: 200px !important; /* Adjust height for other splash pages */
 }
 
 /* Import Google Fonts */
