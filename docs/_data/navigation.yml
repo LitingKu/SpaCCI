@@ -6,7 +6,7 @@ main:
   - title: "Analysis"
     url: "/docs/tutorial1/"  # External link to GitHub
   - title: "Installation"
-    url: "/"  # External link to GitHub
+    url: "/installation/"  # External link to GitHub
   - title: "GitHub"
     url: "https://github.com/LitingKu/SpaCCI"  # External link to GitHub
 
