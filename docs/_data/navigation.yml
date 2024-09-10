@@ -1,6 +1,6 @@
 main:
   - title: "About"
-    url: permalink: /about/ 
+    url: "/SpaCCI/about/"
   - title: "Example Data Download"
     url: "/"  # External link to GitHub
   - title: "Tutorial"
