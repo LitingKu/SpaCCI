@@ -29,6 +29,11 @@ search: false
 
 .greedy-nav .visible-links a {
   font-family: 'ABeeZee', sans-serif !important;
-  color: #83c5be !important;
+  color: #94C47D !important;
   font-size: 1.2rem !important; 
 }
+
+.greedy-nav .visible-links a:hover:before {
+  background: #83c5be !important; /* Change hover underline color */
+}
+
