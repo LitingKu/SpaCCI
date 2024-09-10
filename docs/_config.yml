@@ -7,6 +7,9 @@ url: "https://litingku.github.io" # Your GitHub Pages URL
 plugins:
   - jekyll-include-cache
 
+assets:
+  stylesheets:
+    - /assets/css/custom.scss
 
 
 # Add settings for social links if needed
