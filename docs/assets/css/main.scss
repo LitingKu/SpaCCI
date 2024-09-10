@@ -3,8 +3,6 @@
 search: false
 ---
 
-$link-color: red;
-
 @charset "utf-8";
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
@@ -21,17 +19,17 @@ $link-color: red;
 }
 
 /* Apply Roboto to the navigation links (About, Tutorial, etc.) */
-.nav a {
+.navbar .nav a {
   font-family: 'Roboto', sans-serif;
   color: #83c5be; /* Change this color */
 }
 
-.nav a:hover {
+.navbar .nav a:hover {
   color: #FF9800; /* Change this to your hover color */
 }
 
 /* Apply Open Sans to the page title (e.g., Welcome to SpaCCI) */
-.page-title {
+.page-header .page-title {
   font-family: 'ABeeZee', sans-serif;
   font-weight: normal;
   font-size: 3rem;  /* Adjust size as needed */
