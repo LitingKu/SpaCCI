@@ -1,7 +1,11 @@
 main:
-  - title: "Home"
-    url: "/"  # The homepage
   - title: "About"
-    url: "/main/documentation/01-about/"  # Adjust for the baseurl
+    url: "/main/documentation/01-about/"  
+  - title: "Example Data Download"
+    url: "/"  # External link to GitHub
+  - title: "Tutorial"
+    url: "/"  # External link to GitHub
+  - title: "Installation"
+    url: "/"  # External link to GitHub
   - title: "GitHub"
     url: "https://github.com/LitingKu/SpaCCI"  # External link to GitHub
