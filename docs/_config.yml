@@ -11,8 +11,8 @@ plugins:
 social_links:
   - title: "GitHub"
     url: "https://github.com/LitingKu/SpaCCI"
-
-- scope:
+defaults:
+  - scope:
       path: ""
       type: docs
     values:
@@ -24,6 +24,7 @@ social_links:
       toc_sticky: false
       sidebar:
         nav: "docs"
+
 
 
 assets:
