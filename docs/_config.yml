@@ -1,8 +1,8 @@
 remote_theme: "mmistakes/minimal-mistakes@4.26.2"
 title: "SpaCCI"
 description: "Spatially Aware Cell-Cell Interaction Anaylsis"
-baseurl: "" # You might need to set this based on your site structure
-url: "https://litingku.github.io/SpaCCI" # Your GitHub Pages URL
+baseurl: "/SpaCCI" # You might need to set this based on your site structure
+url: "https://litingku.github.io" # Your GitHub Pages URL
 
 plugins:
   - jekyll-include-cache
