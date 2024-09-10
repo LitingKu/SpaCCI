@@ -7,7 +7,7 @@ main:
     url: "/docs/tutorial1/"  # External link to GitHub
   - title: "Installation"
     url: "/installation/"  # External link to GitHub
-  - title: '<img src="https://github.com/LitingKu/SpaCCI/blob/f9d23d0e4a7680c51073380fcd3027db8a1f016b/docs/assets/images/github-logo.svg" alt="GitHub" style="width: 20px; height: 20px; vertical-align: middle;">'
+  - title: '<img src="github-logo.svg" alt="GitHub" style="width: 20px; height: 20px; vertical-align: middle;">'
     url: "https://github.com/LitingKu/SpaCCI"
 
 
