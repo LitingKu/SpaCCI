@@ -22,8 +22,8 @@ search: false
 
 /* Override navigation link styles */
 .site-nav .nav__link {
-  font-family: 'Roboto', sans-serif;
-  color: #83c5be; /* Normal link color */
+  font-family: 'Roboto', sans-serif !important ;
+  color: #83c5be !important; /* Normal link color */
 }
 
 .site-nav .nav__link:hover {
