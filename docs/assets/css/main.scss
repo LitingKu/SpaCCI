@@ -5,9 +5,6 @@ search: false
 
 @charset "utf-8";
 
-@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
-@import "minimal-mistakes"; // main partials
-
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee&family=Roboto&family=Open+Sans&display=swap');
 
@@ -29,10 +26,8 @@ search: false
 }
 
 /* Apply Open Sans to the page title (e.g., Welcome to SpaCCI) */
-.page-header .page-title {
+.page-header {
   font-family: 'ABeeZee', sans-serif;
-  font-weight: normal;
-  font-size: 3rem;  /* Adjust size as needed */
   color: #2196F3;  /* Change this color */
 }
 
@@ -41,3 +36,9 @@ body {
   font-family: 'Open Sans', sans-serif;
   color: #333;  /* Global text color */
 }
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
+@import "minimal-mistakes"; // main partials
+
+
+
