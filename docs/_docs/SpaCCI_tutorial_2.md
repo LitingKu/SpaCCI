@@ -1,11 +1,11 @@
 ---
 title: "Without Using Seurat Object"
+layout: single
 permalink: /tutorial2/
 toc: true
-toc_label: "On this page"
-toc_icon: "cog"
+toc_sticky: true
 sidebar:
-  nav: "docs"
+  nav: docs
 ---
 
 
