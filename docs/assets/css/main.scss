@@ -3,6 +3,8 @@
 search: false
 ---
 
+$link-color: #83c5be;
+
 @charset "utf-8";
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
