@@ -7,6 +7,19 @@ theme: minimal-mistakes-jekyll  # Gem-based theme setup
 plugins:
   - jekyll-include-cache
 
+# Optional: Set default splash page as the homepage layout
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single  # Default layout for other pages
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single  # Default layout for posts
+
 # Optional navigation links (you can add more)
 navigation:
   - title: "Home"
@@ -14,3 +27,7 @@ navigation:
   - title: "About"
     url: "/about/"
 
+# Add settings for social links if needed
+social_links:
+  - title: "GitHub"
+    url: "https://github.com/LitingKu/SpaCCI"
