@@ -21,7 +21,8 @@ defaults:
       author_profile: false
       share: false
       comments: false
-      toc_sticky: false
+      toc_sticky: true
+      toc: true
       sidebar:
         nav: "docs"
 
