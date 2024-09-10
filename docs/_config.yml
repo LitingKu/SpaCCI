@@ -15,7 +15,7 @@ social_links:
     
 defaults:
   - scope:
-      path: ""
+      path: /_docs/
       type: docs
     values:
       layout: single
