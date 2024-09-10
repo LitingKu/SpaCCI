@@ -17,3 +17,7 @@ assets:
   stylesheets:
     - /assets/css/custom.scss
 
+enable_copy_code_button: true
+
+breadcrumbs: true
+logo: "/assets/images/logo.png"
