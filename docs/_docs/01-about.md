@@ -2,15 +2,6 @@
 layout: splash
 title: "About"
 permalink: /about/
-header:
-  overlay_image: /assets/images/cover.jpg  # Path to your cover image
-  overlay_filter: 0.5  # Adjust the opacity of the overlay (0 to 1)
-  overlay_color: "#333"  # Optional: Add an overlay color on top of the image
-  caption: "About SpaCCI"
-  actions:
-    - label: "Get Started"
-      url: "/tutorial/"
-      class: "btn btn--primary"
 ---
 
 ## SpaCCI key features
