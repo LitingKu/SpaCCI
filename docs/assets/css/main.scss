@@ -20,23 +20,24 @@ search: false
 }
 
 /* Apply Roboto to the navigation links (About, Tutorial, etc.) */
-.navbar .nav a {
-  font-family: 'Roboto', sans-serif;
+.site-nav a {
+  font-family: 'Roboto', sans-serif !important;
   color: #83c5be !important; /* Change this color */
 }
 
-.navbar .nav a:hover {
+.site-nav a:hover {
   color: #FF9800 !important; /* Change this to your hover color */
 }
 
 /* Apply Open Sans to the page title (e.g., Welcome to SpaCCI) */
-.page-header {
+.page-header h1,
+.page-title {
   font-family: 'ABeeZee', sans-serif !important;
   color: #2196F3 !important;  /* Change this color */
 }
 
 /* Apply Open Sans to the entire body */
 body {
-  font-family: 'Open Sans', sans-serif;
-  color: #333;  /* Global text color */
+  font-family: 'Open Sans', sans-serif !important;
+  color: #333 !important;  /* Global text color */
 }
