@@ -5,8 +5,6 @@ search: false
 
 @charset "utf-8";
 
-$link-color: #83c5be !default; 
-$global-font-family: 'Open Sans', sans-serif !default; /* Change the global font */
 
 /* Import Minimal Mistakes theme core styles */
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
@@ -22,14 +20,12 @@ $global-font-family: 'Open Sans', sans-serif !default; /* Change the global font
   color: #83c5be !important; /* Change this color */
 }
 
-/* Apply Roboto to navigation links */
-.site-nav a {
-  font-family: 'Roboto', sans-serif !important;
-  color: $link-color !important;
+/* Override navigation link styles */
+.site-nav .nav__link {
+  font-family: 'Roboto', sans-serif;
+  color: #83c5be; /* Normal link color */
 }
 
-/* Apply ABeeZee to page titles */
-.page-title {
-  font-family: 'ABeeZee', sans-serif !important;
-  color: #2196F3 !important;
+.site-nav .nav__link:hover {
+  color: #FF9800; /* Hover color */
 }
