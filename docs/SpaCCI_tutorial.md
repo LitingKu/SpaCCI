@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: defaults
 title: "Tutorial"
 permalink: /tutorial/
 toc: true
