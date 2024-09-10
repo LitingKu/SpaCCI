@@ -1,5 +1,5 @@
 ---
-title: "Download Example Data"
+subtitle: "Download Example Data"
 layout: single
 permalink: /datas/data_download/
 toc: true
