@@ -1,4 +1,4 @@
-navigation:
+main:
   - title: "Home"
     url: "/"  # The homepage
   - title: "About"
