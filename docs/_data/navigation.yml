@@ -4,7 +4,7 @@ main:
   - title: "Example Data Download"
     url: "/"  # External link to GitHub
   - title: "Tutorial"
-    url: "/tutorial/"  # External link to GitHub
+    url: "/docs/tutorial/"  # External link to GitHub
   - title: "Installation"
     url: "/"  # External link to GitHub
   - title: "GitHub"
@@ -16,15 +16,15 @@ docs:
   - title: Get Started
     children:
       - title: "Load Data"
-        url: /_docs/tutorial/
+        url: /docs/tutorial/
   - title: Analysis
     children:
       - title: "Using Seurat Object"
-        url: /_docs/tutorial/
+        url: /docs/tutorial/
       - title: "Without using Seurat Object"
-        url: /_docs/tutorial2/
+        url: /docs/tutorial2/
   - title: Example Analysis
     children:
       - title: "IPMN sample"
-        url: /_docs/tutorial/
+        url: /docs/tutorial/
 
