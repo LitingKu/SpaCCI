@@ -1,7 +1,9 @@
 ---
-layout: wide
 title: "Tutorial"
 permalink: /tutorial/
+toc: true
+toc_label: "Included Layouts"
+toc_icon: "columns"
 header:
   overlay_color: "#333"
   overlay_image: cover.jpg  # Path to your cover image
