@@ -6,7 +6,7 @@ subtitle: "Spatially Aware Cell-Cell Interaction Analysis"
 header:
   overlay_color: "#333"
   overlay_image: cover2.jpg  # Path to your cover image
-  overlay_filter: 0.4  # Adjust the darkness of the image
+  overlay_filter: 0.2  # Adjust the darkness of the image
 ---
 
 ## <span style="font-family: 'ABeeZee', sans-serif; color: #94C47D;">SpaCCI</span> Overview
