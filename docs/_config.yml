@@ -1,10 +1,10 @@
 remote_theme: "mmistakes/minimal-mistakes@4.26.2" # Use the remote theme method
 
 # Site settings
-title: "SpaCCI Documentation"
-description: "Documentation and details about the SpaCCI package"
-baseurl: "/SpaCCI/docs" # You might need to set this based on your site structure
-url: "https://litingku.github.io" # Your GitHub Pages URL
+title: "SpaCCI"
+description: "Spatially Aware Cell-Cell Interaction Anaylsis"
+baseurl: "/SpaCCI" # You might need to set this based on your site structure
+url: "https://litingku.github.io/SpaCCI" # Your GitHub Pages URL
 
 # Other possible settings for the theme
 plugins:
