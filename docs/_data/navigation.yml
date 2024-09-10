@@ -3,7 +3,7 @@ main:
     url: "/about/"
   - title: "Data Download"
     url: "/data_download/"  # External link to GitHub
-  - title: "Analysis"
+  - title: "Tutorial"
     url: "/docs/tutorial1/"  # External link to GitHub
   - title: "Installation"
     url: "/installation/"  # External link to GitHub
