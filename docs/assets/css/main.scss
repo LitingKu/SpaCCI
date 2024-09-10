@@ -39,16 +39,23 @@ search: false
 
 
 /* Font and color for the sidebar links */
-.sidebar__nav .nav__items a {
-  font-family: 'Roboto', sans-serif;
-  color: #4CAF50; /* Sidebar link color */
+.sidebar .nav__list {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
 }
 
-.sidebar__nav .nav__items a:hover {
-  color: #FF9800; /* Sidebar hover color */
+.sidebar .nav__title {
+  font-weight: bold;
+  font-size: 1.25rem;
+  padding: 0.5rem 0;
 }
 
-.sidebar__nav .nav__items .active {
-  color: #94C47D !important; /* Active link color */
+.sidebar .nav__items a {
+  color: #555;
+  padding: 0.25rem 0;
 }
 
+.sidebar .nav__items a:hover {
+  text-decoration: underline;
+  color: #333;
+}
