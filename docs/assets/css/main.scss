@@ -25,11 +25,10 @@ search: false
 }
 
 
-header.masthead {
-  border-bottom: 2px solid #83c5be !important;
+header.masthead .site-title {
+  color: #ff5722 !important;
 }
 
-header.masthead .site-title {
-  font-family: 'ABeeZee', sans-serif !important;
-  color: #ff5722 !important;
+.greedy-nav .visible-links a {
+  color: #83c5be !important;
 }
