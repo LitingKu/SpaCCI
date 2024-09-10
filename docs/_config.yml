@@ -1,9 +1,26 @@
-remote_theme: pages-themes/cayman@v0.2.0
-name: SpaCCI
-project:
-  version: 1.0.0
-  download_url: https://github.com/LitingKu/SpaCCI/
-  download_text: Download
-  
-plugins:
-- jekyll-remote-theme # add this line to the plugins list if you already have one
+# SITE CONFIGURATION
+baseurl: ""
+url: "https://litingku.github.io/SpaCCI"
+
+# BLOG CONFIGURATION
+post_navigation: true
+paginate: 10
+paginate_path: "blog/page:num"
+plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed]
+
+title: SpaCCI                 # Name of website
+avatar: assets/img/avatar.png         # Path of avatar image, to be displayed in the theme's header
+description: Spatially Aware Cell-Cell Interaction Analysis            # Short description, primarily used by search engines
+favicon: assets/favicon.ico           # Icon displayed in the tab
+color_theme: auto                     # color theme auto, dark or light
+
+
+
+
+header_text: Welcome to SpaCCI
+footer_text: Copyright 2024
+
+header_feature_image: assets/img/header/my-header-image.png
+header_feature_image_responsive: true
+
+google_analytics: G-XXXXXXXXXX
