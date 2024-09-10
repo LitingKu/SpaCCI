@@ -13,4 +13,7 @@ social_links:
     url: "https://github.com/LitingKu/SpaCCI"
 
 
+assets:
+  stylesheets:
+    - /assets/css/custom.scss
 
