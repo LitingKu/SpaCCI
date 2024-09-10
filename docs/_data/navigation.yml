@@ -1,6 +1,6 @@
 main:
   - title: "About"
-    url: "https://github.com/LitingKu/SpaCCI/blob/fd5e6cddb6d9351cf0074513dd4bc962a78255dc/docs/_docs/01-about.md"
+    url: "/SpaCCI/about/"
   - title: "Example Data Download"
     url: "/"  # External link to GitHub
   - title: "Tutorial"
