@@ -12,16 +12,18 @@ social_links:
   - title: "GitHub"
     url: "https://github.com/LitingKu/SpaCCI"
 
-defaults:
-  - scope:
+- scope:
       path: ""
-      type: "docs"
+      type: docs
     values:
-      layout: "single"
+      layout: single
+      read_time: false
+      author_profile: false
+      share: false
+      comments: false
+      toc_sticky: false
       sidebar:
         nav: "docs"
-        
-
 
 
 assets:
