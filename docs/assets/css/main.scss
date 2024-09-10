@@ -37,3 +37,18 @@ search: false
   background: #83c5be !important; /* Change hover underline color */
 }
 
+
+/* Font and color for the sidebar links */
+.sidebar__nav .nav__items a {
+  font-family: 'Roboto', sans-serif;
+  color: #4CAF50; /* Sidebar link color */
+}
+
+.sidebar__nav .nav__items a:hover {
+  color: #FF9800; /* Sidebar hover color */
+}
+
+.sidebar__nav .nav__items .active {
+  color: #FF9800; /* Active link color */
+}
+
