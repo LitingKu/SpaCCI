@@ -8,14 +8,7 @@ url: "https://litingku.github.io/SpaCCI" # Your GitHub Pages URL
 plugins:
   - jekyll-include-cache
 
-navigation:
-  - title: "Home"
-    url: "/"  # The homepage
-  - title: "About"
-    url: "/documentation/01-about/"  # URL for the About page
-  - title: "GitHub"
-    url: "https://github.com/LitingKu/SpaCCI"  # External link to GitHub
-    
+
 
 # Add settings for social links if needed
 social_links:
