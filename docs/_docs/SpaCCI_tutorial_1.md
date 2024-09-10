@@ -1,12 +1,11 @@
 ---
-layout: single
-title: "Tutorial"
-permalink: /tutorial/
+title: "Using Seurat Object"
+permalink: /tutorial1/
 toc: true
 toc_label: "On this page"
 toc_icon: "cog"
-enable_copy_code_button: true
-breadcrumbs: true
+sidebar:
+  nav: "docs"
 ---
 
 
