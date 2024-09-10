@@ -1,5 +1,6 @@
 ---
 layout: splash
+homepage: true
 title: "Welcome to SpaCCI"
 header:
   overlay_color: "#333"
