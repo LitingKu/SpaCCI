@@ -6,7 +6,6 @@ toc_label: "Included Layouts"
 toc_icon: "columns"
 enable_copy_code_button: true
 breadcrumbs: true
-logo: "/assets/images/logo.png"
 ---
 
 
