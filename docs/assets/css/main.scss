@@ -5,6 +5,10 @@ search: false
 
 @charset "utf-8";
 
+/* Import Minimal Mistakes theme core styles */
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
+@import "minimal-mistakes"; // main partials
+
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee&family=Roboto&family=Open+Sans&display=swap');
 
@@ -36,9 +40,3 @@ body {
   font-family: 'Open Sans', sans-serif;
   color: #333;  /* Global text color */
 }
-
-@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
-@import "minimal-mistakes"; // main partials
-
-
-
