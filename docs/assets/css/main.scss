@@ -38,14 +38,16 @@ search: false
   background: #83c5be !important; /* Change hover underline color */
 }
 
-.nav a[title="GitHub"] svg {
-  fill: #38a3a5; /* Apply color */
-  width: 24px;
-  height: 24px;
+a[title="GitHub"]::before {
+  content: url("/assets/images/github-logo.svg") !important;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  color: #38a3a5 !important; /* Same color as your text */
 }
 
-.nav a[title="GitHub"]:hover svg {
-  fill: #83c5be; /* Hover color */
+a[title="GitHub"]:hover::before {
+  background-color: #83c5be !important; /* Hover effect */
 }
 
 /* Font and color for the sidebar links */
