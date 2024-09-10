@@ -9,8 +9,8 @@ header:
   overlay_filter: 0.5  # Adjust the darkness of the image
 ---
 
-SpaCCI R package can be installed from GitHub using the following steps::  
-<span style="color:#94C47D;">SpaCCI</span> is the tool's name.
+<span style="color:#94C47D;">SpaCCI</span> R package can be installed from GitHub using the following steps::  
+
 
 ## (C) Local analysis
 
