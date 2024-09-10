@@ -1,7 +1,7 @@
 ---
 title: "Using Seurat Object"
 layout: single
-permalink: /tutorial1/
+permalink: /docs/tutorial1/
 toc: true
 toc_sticky: true
 sidebar:
