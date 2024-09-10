@@ -1,11 +1,11 @@
 ---
-layout: splash
 title: "Data Download"
+layout: single
 permalink: /data_download/
-header:
-  overlay_color: "#333"
-  overlay_image: cover2.jpg  # Path to your cover image
-  overlay_filter: 0.2  # Adjust the darkness of the image
+toc: true
+toc_sticky: true
+sidebar:
+  nav: datas
 ---
 
 
