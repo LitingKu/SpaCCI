@@ -9,7 +9,6 @@ header:
 ---
 
 
-
 ## Introduction
 
 This tutorial demonstrates how to use the SpaCCI package for analyzing
