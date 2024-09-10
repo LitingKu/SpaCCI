@@ -10,7 +10,7 @@ plugins:
 
 assets:
   stylesheets:
-    - /assets/css/custom.css
+    - /docs/assets/css/custom.css
     
 # Add settings for social links if needed
 social_links:
