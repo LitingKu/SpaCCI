@@ -31,3 +31,10 @@ docs:
       - title: "IPMN sample"
         url: /docs/tutorial1/
 
+
+# documentation links
+datas:
+  - title: "Get Started"
+    children:
+      - title: "Data Download"
+        url: /data_download/
