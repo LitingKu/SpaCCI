@@ -1,4 +1,6 @@
-## SpaCCI Overview
+---
+layout: home
+title: "Welcome to SpaCCI"
 ---
 <p align="center">
   <img width="1000"  src="SPACCI Method Diagram.png">
