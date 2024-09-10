@@ -8,10 +8,7 @@ plugins:
   - jekyll-include-cache
 
 
-assets:
-  stylesheets:
-    - /docs/assets/css/custom.scss
-    
+
 # Add settings for social links if needed
 social_links:
   - title: "GitHub"
