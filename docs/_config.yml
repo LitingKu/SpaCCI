@@ -9,7 +9,7 @@ plugins:
 
 assets:
   stylesheets:
-    - /assets/css/custom.scss
+    - /SpaCCI/assets/css/custom.scss
 
 
 # Add settings for social links if needed
