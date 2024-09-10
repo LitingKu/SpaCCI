@@ -35,7 +35,7 @@ header:
     library(SpaCCI)
 
 
-The package has currently been test on:
+The package has currently been tested on:
 - MAC: OS Sonoma (14.6.1)
 
 
