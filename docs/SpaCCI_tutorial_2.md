@@ -1,7 +1,7 @@
 ---
 layout: single
-title: "Tutorial"
-permalink: /tutorial/
+title: "Tutorial2"
+permalink: /tutorial2/
 toc: true
 toc_label: "On this page"
 toc_icon: "cog"
