@@ -12,7 +12,7 @@ main:
 
 
 # documentation links
-sidebar-sample:
+docs:
   - title: Get Started
     children:
       - title: "Load Data"
