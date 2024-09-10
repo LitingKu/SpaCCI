@@ -7,3 +7,37 @@ search: false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee&family=Roboto&family=Open+Sans&display=swap');
+
+/* Apply ABeeZee to the site title (top left corner) */
+.site-title {
+  font-family: 'ABeeZee', sans-serif;
+  font-weight: bold;
+  color: #ff5722; /* Change this color */
+}
+
+/* Apply Roboto to the navigation links (About, Tutorial, etc.) */
+.nav a {
+  font-family: 'Roboto', sans-serif;
+  color: #4CAF50; /* Change this color */
+}
+
+.nav a:hover {
+  color: #FF9800; /* Change this to your hover color */
+}
+
+/* Apply Open Sans to the page title (e.g., Welcome to SpaCCI) */
+.page-title {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: normal;
+  font-size: 3rem;  /* Adjust size as needed */
+  color: #2196F3;  /* Change this color */
+}
+
+/* Apply Open Sans to the entire body */
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: #333;  /* Global text color */
+}
