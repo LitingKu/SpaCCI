@@ -1,7 +1,8 @@
 ---
-title: "Installation"
 layout: splash
+title: "Installation"
 permalink: /installation/
+subtitle: "Spatially Aware Cell-Cell Interaction Analysis"
 header:
   overlay_color: "#333"
   overlay_image: cover.jpg  # Path to your cover image
