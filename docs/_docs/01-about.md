@@ -4,7 +4,7 @@ title: "About"
 permalink: /docs/about/
 header:
   overlay_color: "#333"
-  overlay_image: cover.jpg  # Path to your cover image
+  overlay_image: <https://github.com/LitingKu/SpaCCI/blob/6a045e98b1038802c7b6ddb48bfc0ff4a18ba3fe/docs/cover.jpg>  # Path to your cover image
   overlay_filter: 0.5  # Adjust the darkness of the image
 ---
 
