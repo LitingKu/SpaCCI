@@ -3,7 +3,7 @@ title: "Using Seurat Object"
 layout: single
 permalink: /docs/tutorial1/
 toc: true
-toc_label: "My Table of Contents"
+toc_label: "On this page"
 toc_icon: "cog"
 toc_sticky: true
 sidebar:
