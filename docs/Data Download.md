@@ -24,7 +24,7 @@ After loading `Tutorial_example_data.rda`, the following objects should be avail
 - `interest_region_Spot_IDs`: Spot IDs for conducting "regional" analysis.
     
 ## 2. Non Seurat Data for Tutorial
-For NOT using the Seurat object, please also first download the following data file. 
+If NOT using the Seurat object, please also first download the following data file. 
 
 - **<a href="https://github.com/LitingKu/SpaCCI/blob/main/SpaCCI_tutorial_files/data/normalized_gene_spot_df.csv" style="color: #38a3a5;"> Gene Expression Data</a>**: A spot-level data frame with genes as row
     names and spot IDs as column names.
