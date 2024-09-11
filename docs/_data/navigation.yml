@@ -16,25 +16,25 @@ main:
 
 # documentation links
 docs:
-  - title: Get Started
+  - title: "Get Started"
     children:
       - title: "Load Data"
         url: /docs/tutorial1/
-  - title: Analysis
+  - title: "Example Analysis"
     children:
       - title: "Using Seurat Object"
         url: /docs/tutorial1/
-      - title: "Without using Seurat Object"
+      - title: "Without Using Seurat Object"
         url: /docs/tutorial2/
-  - title: Example Analysis
+  - title: "Real Data Analysis"
     children:
-      - title: "IPMN sample"
+      - title: "Real 10X Visium Data"
         url: /docs/tutorial1/
 
 
 # documentation links
 datas:
-  - title: "Get Started"
+  - title: ""
     children:
       - title: "Download Example Data"
         url: /datas/data_download/
