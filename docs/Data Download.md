@@ -41,7 +41,11 @@ For regional analysis, please also load the data as following to obtain the `int
 
 ## 3. Real 10X Visium Data
 
+<a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE233254"> GSE233254</a>: Contains the 10X Visium data.
 
+<a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE233293"> GSE233293</a>: Contains the RCTD(Robust Cell Type Deconvolution) of the 10X Visium data.
+
+from <a href="https://doi.org/10.1158/2159-8290.CD-22-1200"> Sans M, Makino Y, Min J, et al. Spatial Transcriptomics of Intraductal Papillary Mucinous Neoplasms of the Pancreas Identifies NKX6-2 as a Driver of Gastric Differentiation and Indolent Biological Potential. Cancer Discov. 2023;13(8):1844-1861. doi:10.1158/2159-8290.CD-22-1200</a>
 
 
 
