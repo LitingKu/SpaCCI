@@ -19,7 +19,7 @@ docs:
   - title: "Get Started"
     children:
       - title: "Load Data"
-        url: /docs/tutorial1/
+        url: /docs/Load_Data/
   - title: "Example Analysis"
     children:
       - title: "Using Seurat Object"
