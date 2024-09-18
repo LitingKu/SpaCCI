@@ -117,7 +117,7 @@ overall results using heatmap.
                         main= "Significant Cell-Cell Interaction Count")
     print(p)
 
-![](https://github.com/LitingKu/SpaCCI/blob/2b193b8b1b22bec52aea596cbdbb341486fe2261/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+![](unnamed-chunk-8-1.png)
 
 Then we could plot the chord Diagram by specifying specific
 Ligand-Receptor pair or Pathway name.
@@ -133,14 +133,14 @@ Ligand-Receptor pair or Pathway name.
                              specific_celltypes = c(colnames(cell_prop_df)),
                              L_R_pair_name  = "AREG_EGFR")
 
-![](https://github.com/LitingKu/SpaCCI/blob/2b193b8b1b22bec52aea596cbdbb341486fe2261/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+![](unnamed-chunk-9-1.png)
 
     # plot the result with chordDiagram while selecting specific pathway name
     plot_SpaCCI_chordDiagram(SpaCCI_Result_List = result_global,
                       specific_celltypes = c(colnames(cell_prop_df)),
                       pathway_name  = "EGF")
 
-![](https://github.com/LitingKu/SpaCCI/blob/2b193b8b1b22bec52aea596cbdbb341486fe2261/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-9-2.png)
+![](unnamed-chunk-9-2.png)
 
 #### (B) Regional analysis
 
@@ -164,7 +164,7 @@ Here we run the regional analysis on the whole slide with selected
                         specific_celltypes = c(colnames(cell_prop_df)), alpha = 0.05,
                         main= "Significant Cell-Cell Interaction Count in the Interested Region")
 
-![](https://github.com/LitingKu/SpaCCI/blob/2b193b8b1b22bec52aea596cbdbb341486fe2261/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-10-1.png)
+![](unnamed-chunk-10-1.png)
 
 #### (C) Local analysis
 
@@ -194,4 +194,4 @@ Then we plot the localized plot to access the local signalling hotspot.
 
     ## [1] "plotting using image spatial coordinates"
 
-![](https://github.com/LitingKu/SpaCCI/blob/2b193b8b1b22bec52aea596cbdbb341486fe2261/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-12-2.png)
+![](unnamed-chunk-12-2.png)
