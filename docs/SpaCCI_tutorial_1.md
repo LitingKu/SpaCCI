@@ -198,7 +198,7 @@ overall results using heatmap.
                         main= "Significant Cell-Cell Interaction Count")
     print(p)
 
-![](SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+![](https://github.com/LitingKu/SpaCCI/blob/2b193b8b1b22bec52aea596cbdbb341486fe2261/SpaCCI_tutorial_files/figure-markdown_strict/unnamed-chunk-8-1.png)
 
 Then we could plot the chord Diagram by specifying specific
 Ligand-Receptor pair or Pathway name.
