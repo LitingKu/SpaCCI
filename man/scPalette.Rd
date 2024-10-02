@@ -16,7 +16,7 @@ A character vector of colors in hexadecimal format.
 This function generates a color palette. It selects colors from a predefined color space, and if more colors are needed than are available in the predefined set, it generates a palette using color interpolation.
 }
 \examples{
-\dontrun{
+\donttest{
 # Generate a palette with 5 colors
 palette <- scPalette(5)
 print(palette)

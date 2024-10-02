@@ -21,12 +21,3 @@ A list containing:
 \description{
 CellPhone Database: This function identifies possible ligand-receptor (L-R) pairs for cell-cell communication analysis using data from a CellPhoneDB dataset. It checks for the presence of all genes involved in each L-R pair within the provided gene expression matrix and filters based on a specified expression percentage threshold.
 }
-\examples{
-\dontrun{
-gene_spot_expression_dataframe <- matrix(data = rnorm(1000), nrow = 100, ncol = 10)
-rownames(gene_spot_expression_dataframe) <- paste0("Gene", 1:100)
-result <- possible_L_R_pairs_cellphoneDB(
-   gene_spot_expression_dataframe = gene_spot_expression_dataframe)
-}
-
-}

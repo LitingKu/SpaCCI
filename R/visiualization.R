@@ -15,25 +15,21 @@
 #' @return A plot object showing the localized interaction patterns. The plot will be generated using either the Seurat object or the spatial coordinates data frame, depending on the input provided.
 #'
 #' @examples
-#' \dontrun{
 #' # Plot localized SpaCCI results using Seurat object
-#' Result <- run_SpaCCI(..., analysis_scale = "local",...)
-#' plot_SpaCCI_local(Seurat_Object = seurat_object,
-#'                   SpaCCI_local_Result_List = Result,
-#'                   Ligand_cell_type = "Beta_cells",
-#'                   Receptor_cell_type = "T_cells",
-#'                   spot_plot_size = 3)
+#' library(SpaCCI)
+#' data(result_local)
+#' data(test_data)
+#' spatial_coords_df <- test_data$spatial_coords_df
+#' #plot_SpaCCI_local(Seurat_Object = seurat_object,.....)
 #'
 #' # Plot localized SpaCCI results using spatial coordinates
-#' plot_SpaCCI_local(spatial_coordinates_dataframe = spatial_coords,
-#'                   SpaCCI_local_Result_List = Result,
-#'                   Ligand_cell_type = "Beta_cells",
-#'                   Receptor_cell_type = "T_cells",
+#' plot_SpaCCI_local(spatial_coordinates_dataframe = spatial_coords_df,
+#'                   SpaCCI_local_Result_List = result_local,
+#'                   Ligand_cell_type = "beta",
+#'                   Receptor_cell_type = "delta",
 #'                   spot_plot_size = 3)
-#' }
 #'
 #' @export
-#''
 
 plot_SpaCCI_local <- function(Seurat_Object = NULL,
                               spatial_coordinates_dataframe = NULL,
@@ -47,7 +43,8 @@ plot_SpaCCI_local <- function(Seurat_Object = NULL,
   if (is.null(Seurat_Object) & is.null(spatial_coordinates_dataframe)){
     stop("Please input either a Seurat_object with image or input a spatial_coordinates_dataframe")
   }else if (!is.null(Seurat_Object)){
-    print("plotting using Seurat image")
+    message("writing data frame")
+    message("plotting using Seurat image")
     local_plot <- plot_localized_Seurat(Seurat_object = Seurat_Object,
                                         resultdf_list = SpaCCI_local_Result_List$dataframelist,
                                         RegionIDs_matrix = SpaCCI_local_Result_List$RegionIDs_matrix,
@@ -58,7 +55,8 @@ plot_SpaCCI_local <- function(Seurat_Object = NULL,
                                         alpha = significant_cutoff)
 
   }else if(!is.null(spatial_coordinates_dataframe)){
-    print("plotting using image spatial coordinates")
+    message("writing data frame")
+    message("plotting using image spatial coordinates")
     local_plot <- plot_localized(spatial_coord = spatial_coordinates_dataframe ,
                                  resultdf_list = SpaCCI_local_Result_List$dataframelist,
                                  RegionIDs_matrix = SpaCCI_local_Result_List$RegionIDs_matrix,
@@ -95,7 +93,9 @@ plot_SpaCCI_local <- function(Seurat_Object = NULL,
 #' @return The localized plot from the inferred cell-cell interaction on the local scale.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' # Not Run
+#'
 #' # Run localized hotspot plot
 #' Result <- run_SpaCCI(..., analysis_scale = "local",...)
 #' local_plot <- plot_localized_Seurat(Seurat_object = gene_spot_df,
@@ -222,10 +222,10 @@ plot_localized_Seurat <- function(Seurat_object,
 #' @return The localized plot from the inferred cell-cell interaction on the local scale.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Run localized hotspot plot
 #' Result <- run_SpaCCI(..., analysis_scale = "local",...)
-#' local_plot <- plot_localized(Seurat_object = gene_spot_df,
+#' local_plot <- plot_localized(spatial_coord = spatial_coords_df,
 #'                             resultdf_list = Result$dataframelist,
 #'                             RegionIDs_matrix = Result$RegionIDs_matrix,
 #'                             celltype_ligand = "Beta_cells",
@@ -386,38 +386,19 @@ plot_localized <- function(spatial_coord,
 #' }
 #'
 #' @examples
-#' \dontrun{
-#'
-#' # Run global analysis
-#' result_global <- run_SpaCCI(gene_spot_expression_dataframe = gene_spot_df,
-#'                             spot_cell_proportion_dataframe = cell_prop_df,
-#'                             spatial_coordinates_dataframe = spatial_coords_df,
-#'                             LR_database_list = LR_database("Human", "CellChat", gene_spot_df),
-#'                             analysis_scale = "global")
-#'
-#' # Run the result heatmap for global analysis
+#' library(SpaCCI)
+#' library(dplyr)
+#' library(reshape2)
+#' library(grDevices)
+#' library(pheatmap)
+#' data(result_global)
+#' celltypes <- c("beta" , "delta" , "ductal","macrophage",
+#'                 "activated_stellate", "quiescent_stellate")
 #' plot_SpaCCI_heatmap(SpaCCI_Result_List = result_global,
 #'                     symmetrical = FALSE, cluster_cols = FALSE, return_tables = FALSE,
 #'                     cluster_rows = FALSE, #cellheight = 10, cellwidth = 10,
-#'                     specific_celltypes = c(colnames(cell_prop_df)),
+#'                     specific_celltypes = c(celltypes),
 #'                     main= "Cell-Cell Interaction Count")
-#'
-#' # Run regional analysis
-#' result_regional <- run_SpaCCI(gene_spot_expression_dataframe = gene_spot_df,
-#'                               spot_cell_proportion_dataframe = cell_prop_df,
-#'                               spatial_coordinates_dataframe = spatial_coords_df,
-#'                               LR_database_list = LR_database("Human", "CellChat", gene_spot_df),
-#'                               analysis_scale = "regional",
-#'                               region_spot_IDs = c("Spot1", "Spot2", "Spot3"))
-#'
-#' # Run the result heatmap for regional analysis
-#' plot_SpaCCI_heatmap(SpaCCI_Result_List = result_regional,
-#'                     symmetrical = FALSE, cluster_cols = FALSE, return_tables = FALSE,
-#'                     cluster_rows = FALSE, #cellheight = 10, cellwidth = 10,
-#'                     specific_celltypes = c(colnames(cell_prop_df)),
-#'                     main= "Cell-Cell Interaction Count")
-#'
-#'}
 #'
 #' @export
 #'
@@ -506,7 +487,7 @@ plot_SpaCCI_heatmap <- function(SpaCCI_Result_List , specific_celltypes = NULL, 
 #' @return A character vector of colors in hexadecimal format.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Generate a palette with 5 colors
 #' palette <- scPalette(5)
 #' print(palette)
@@ -544,34 +525,16 @@ scPalette <- function(n) {
 #' @return A chord diagram plot visualizing the significant cell-cell interactions.
 #' @importFrom dplyr %>% filter group_by summarise
 #' @examples
-#' \dontrun{
-#'
-#' # Run global analysis
-#' result_global <- run_SpaCCI(gene_spot_expression_dataframe = gene_spot_df,
-#'                             spot_cell_proportion_dataframe = cell_prop_df,
-#'                             spatial_coordinates_dataframe = spatial_coords_df,
-#'                             LR_database_list = LR_database("Human", "CellChat", gene_spot_df),
-#'                             analysis_scale = "global")
-#'
-#' # Run the result heatmap for global analysis
+#' library(SpaCCI)
+#' library(dplyr)
+#' library(circlize)
+#' data(result_global)
+#' celltypes <- c("beta" , "delta" , "ductal","macrophage",
+#'                 "activated_stellate", "quiescent_stellate")
+#' # Run the result chordDiagram for global analysis
 #' plot_SpaCCI_chordDiagram(SpaCCI_Result_List = result_global,
-#'                          specific_celltypes = c(colnames(cell_prop_df)),
+#'                          specific_celltypes = c(celltypes),
 #'                          L_R_pair_name  = "AREG_EGFR")
-#'
-#' # Run regional analysis
-#' result_regional <- run_SpaCCI(gene_spot_expression_dataframe = gene_spot_df,
-#'                               spot_cell_proportion_dataframe = cell_prop_df,
-#'                               spatial_coordinates_dataframe = spatial_coords_df,
-#'                               LR_database_list = LR_database("Human", "CellChat", gene_spot_df),
-#'                               analysis_scale = "regional",
-#'                               region_spot_IDs = c("Spot1", "Spot2", "Spot3"))
-#'
-#' # Run the result heatmap for regional analysis
-#' plot_SpaCCI_chordDiagram(SpaCCI_Result_List = result_regional,
-#'                          specific_celltypes = c(colnames(cell_prop_df)),
-#'                          L_R_pair_name  = "AREG_EGFR")
-#'
-#'}
 #'
 #' @importFrom circlize chordDiagram
 #' @importFrom dplyr filter group_by summarise left_join

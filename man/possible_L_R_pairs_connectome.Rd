@@ -21,9 +21,3 @@ A list containing:
 \description{
 ConnectomeDB 2020 Database: This function identifies possible ligand-receptor (L-R) pairs based on gene expression data.
 }
-\examples{
-\dontrun{
-# Example usage:
-result <- possible_L_R_pairs_connectome(gene_spot_expression_dataframe)
-}
-}

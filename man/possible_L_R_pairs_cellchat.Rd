@@ -29,10 +29,13 @@ This function identifies possible ligand-receptor (L-R) pairs for cell-cell comm
 }
 \examples{
 
-\dontrun{
-gene_spot_expression_dataframe <- matrix(data = rnorm(1000), nrow = 100, ncol = 10)
-rownames(gene_spot_expression_dataframe) <- paste0("Gene", 1:100)
+\donttest{
+library(SpaCCI)
+#Load the example data
+load(system.file("extdata", "Tutorial_example_data.rda", package = "SpaCCI"))
+Example_Seurat <- NormalizeData(Example_Seurat)
+gene_spot_df <- as.data.frame(Example_Seurat@assays$Spatial@data)
 result <- possible_L_R_pairs_cellchat(CellChatDB.human,
-      gene_spot_expression_dataframe = gene_spot_expression_dataframe)
+      gene_spot_expression_dataframe = gene_spot_df)
 }
 }

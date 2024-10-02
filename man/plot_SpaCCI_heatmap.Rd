@@ -94,37 +94,18 @@ Plot SpaCCI Results on the heatmap
 Visualize inferred significant cell-cell interactions using a heatmap
 }
 \examples{
-\dontrun{
-
-# Run global analysis
-result_global <- run_SpaCCI(gene_spot_expression_dataframe = gene_spot_df,
-                            spot_cell_proportion_dataframe = cell_prop_df,
-                            spatial_coordinates_dataframe = spatial_coords_df,
-                            LR_database_list = LR_database("Human", "CellChat", gene_spot_df),
-                            analysis_scale = "global")
-
-# Run the result heatmap for global analysis
+library(SpaCCI)
+library(dplyr)
+library(reshape2)
+library(grDevices)
+library(pheatmap)
+data(result_global)
+celltypes <- c("beta" , "delta" , "ductal","macrophage",
+                "activated_stellate", "quiescent_stellate")
 plot_SpaCCI_heatmap(SpaCCI_Result_List = result_global,
                     symmetrical = FALSE, cluster_cols = FALSE, return_tables = FALSE,
                     cluster_rows = FALSE, #cellheight = 10, cellwidth = 10,
-                    specific_celltypes = c(colnames(cell_prop_df)),
+                    specific_celltypes = c(celltypes),
                     main= "Cell-Cell Interaction Count")
-
-# Run regional analysis
-result_regional <- run_SpaCCI(gene_spot_expression_dataframe = gene_spot_df,
-                              spot_cell_proportion_dataframe = cell_prop_df,
-                              spatial_coordinates_dataframe = spatial_coords_df,
-                              LR_database_list = LR_database("Human", "CellChat", gene_spot_df),
-                              analysis_scale = "regional",
-                              region_spot_IDs = c("Spot1", "Spot2", "Spot3"))
-
-# Run the result heatmap for regional analysis
-plot_SpaCCI_heatmap(SpaCCI_Result_List = result_regional,
-                    symmetrical = FALSE, cluster_cols = FALSE, return_tables = FALSE,
-                    cluster_rows = FALSE, #cellheight = 10, cellwidth = 10,
-                    specific_celltypes = c(colnames(cell_prop_df)),
-                    main= "Cell-Cell Interaction Count")
-
-}
 
 }

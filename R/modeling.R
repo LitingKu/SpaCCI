@@ -84,11 +84,12 @@ Find_regional_IDs <- function(object,
 #' @return A character vector of the same length as `CellType`, with elements shuffled such that no element remains in its original position.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' original <- c("B_cell", "T_cell", "NK_cell", "Macrophage")
 #' shuffled <- GetShuffledCT(original)
 #' print(shuffled)
-#'}
+#' }
+#'
 #' @export'
 #'
 GetShuffledCT <- function(CellType) {
@@ -113,7 +114,7 @@ GetShuffledCT <- function(CellType) {
 #' @return A character vector of the `n_ids` closest IDs to the specified center ID.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' spatial_coord <- data.frame(
 #'   imagecol = c(1, 2, 3, 4, 5),
 #'   imagerow = c(5, 4, 3, 2, 1),
@@ -171,7 +172,6 @@ SpaCCI_local <- function(gene_spot_df,
                          matching_L_R_pairs_info){
 
   dataframelist <- list()
-  set.seed(123)
   centerIDs <- sample(c(colnames(gene_spot_df)), size = round(ncol(gene_spot_df)*prop) )
   #centerIDs <- c(colnames(gene_spot_df))
   RegionIDs_matrix <- list()
@@ -190,8 +190,10 @@ SpaCCI_local <- function(gene_spot_df,
     setTxtProgressBar(pb, id)
     ids <- c(RegionIDs_matrix[[ centerIDs[id] ]])
     ids <- ids[ids %in% colnames(gene_spot_df)]
-    set.seed(123)
     nboot <- as.numeric(floor(nrow(spot_cell_prop_df)/500)*100)
+    if (nboot == 0){
+      nboot <- 1
+    }
 
     premut_center <- sample(colnames(gene_spot_df[,-which(colnames(gene_spot_df) %in% ids )]), size = nboot)
     region_permut_index <- vector("list", length(premut_center))
@@ -299,14 +301,24 @@ SpaCCI_local <- function(gene_spot_df,
       ReceptorVectorIndex <- c(which(rownames(gene_spot_df) %in% c(matching_L_R_pairs$receptor_vector[[i]])))
       # Call the function
 
-      averageResult <- Local_Regional_Permutations(permutationMatrix,
-                                                   permut_col,
-                                                   cellPropMatrix,
-                                                   GeneSpotMatrix,
-                                                   LigandVectorIndex,
-                                                   ReceptorVectorIndex,
-                                                   null_expression,
-                                                   nboot)
+      averageResult <- .Call("_SpaCCI_Local_Regional_Permutations",
+                             permutationMatrix,
+                             permut_col,
+                             cellPropMatrix,
+                             GeneSpotMatrix,
+                             LigandVectorIndex,
+                             ReceptorVectorIndex,
+                             null_expression,
+                             nboot)
+
+      #averageResult <- Local_Regional_Permutations(permutationMatrix,
+      #                                             permut_col,
+      #                                             cellPropMatrix,
+      #                                             GeneSpotMatrix,
+      #                                             LigandVectorIndex,
+      #                                             ReceptorVectorIndex,
+      #                                             null_expression,
+      #                                             nboot)
 
 
 
@@ -349,6 +361,7 @@ SpaCCI_local <- function(gene_spot_df,
   }
 
   close(con = pb)
+  message("writing data frame")
   return(list(dataframelist = dataframelist,RegionIDs_matrix = RegionIDs_matrix))
 
 
@@ -387,7 +400,6 @@ SpaCCI_region <- function(gene_spot_df,
   cellPropMatrix <- as.matrix(spot_cell_prop_df)
   GeneSpotMatrix <- as.matrix(gene_spot_df)
   # construct permutation IDs
-  set.seed(123)
   nboot <- 1000
   indices <- as.numeric(match(colnames(gene_spot_df[,-which(colnames(gene_spot_df) %in% region_spot_IDs )]), colnames(gene_spot_df) ))
   permutation <- replicate(nboot, sample(indices, size = length(region_spot_IDs)))
@@ -407,7 +419,7 @@ SpaCCI_region <- function(gene_spot_df,
   pb <- txtProgressBar(min = 0, max =  nrow(matching_L_R_pairs), style = 3, file = stderr())
   ############ start ############
   for (i in 1:nrow(matching_L_R_pairs)){
-    #print(paste("running L-R pairs",i))
+
     setTxtProgressBar(pb, i)
     avg_ligand_list <- vector("list", length = length(matching_L_R_pairs$ligand_vector[[i]]))
     avg_ligand_list_f <- vector("list", length = length(matching_L_R_pairs$ligand_vector[[i]]))
@@ -499,14 +511,25 @@ SpaCCI_region <- function(gene_spot_df,
     ReceptorVectorIndex <- c(which(rownames(gene_spot_df) %in% c(matching_L_R_pairs$receptor_vector[[i]])))
     # Call the function
 
-    averageResult <- Local_Regional_Permutations(permutationMatrix,
-                                                 permut_col,
-                                                 cellPropMatrix,
-                                                 GeneSpotMatrix,
-                                                 LigandVectorIndex,
-                                                 ReceptorVectorIndex,
-                                                 null_expression,
-                                                 nboot)
+    averageResult <- .Call("_SpaCCI_Local_Regional_Permutations",
+                           permutationMatrix,
+                           permut_col,
+                           cellPropMatrix,
+                           GeneSpotMatrix,
+                           LigandVectorIndex,
+                           ReceptorVectorIndex,
+                           null_expression,
+                           nboot)
+
+
+    #averageResult <- Local_Regional_Permutations(permutationMatrix,
+    #                                             permut_col,
+    #                                             cellPropMatrix,
+    #                                             GeneSpotMatrix,
+    #                                             LigandVectorIndex,
+    #                                             ReceptorVectorIndex,
+    #                                             null_expression,
+    #                                             nboot)
 
 
 
@@ -532,7 +555,7 @@ SpaCCI_region <- function(gene_spot_df,
 
   close(con = pb)
 
-  print("writing data frame")
+  message("writing data frame")
   ##############
 
   table <- lapply(seq_along(output), function(i) {
@@ -581,7 +604,6 @@ SpaCCI_global <- function(gene_spot_df,
   GeneSpotMatrix <- as.matrix(gene_spot_df)
   region_spot_IDs <- rownames(spot_cell_prop_df)
   # construct permutation IDs
-  set.seed(123)
   nboot <- 500
   permutation <- replicate(nboot, sample(ncol(gene_spot_df), size = length(colnames(gene_spot_df))))
   permut_col <- replicate(nboot, GetShuffledCT(length(colnames(spot_cell_prop_df))) )
@@ -599,7 +621,6 @@ SpaCCI_global <- function(gene_spot_df,
   pb <- txtProgressBar(min = 0, max =  nrow(matching_L_R_pairs), style = 3, file = stderr())
   ############ start ############
   for (i in 1:nrow(matching_L_R_pairs)){
-    #print(paste("running L-R pairs",i))
     setTxtProgressBar(pb, i)
     avg_ligand_list <- vector("list", length = length(matching_L_R_pairs$ligand_vector[[i]]))
     avg_receptor_list <- vector("list", length = length(matching_L_R_pairs$receptor_vector[[i]]))
@@ -689,15 +710,26 @@ SpaCCI_global <- function(gene_spot_df,
     ReceptorVectorIndex <- c(which(rownames(gene_spot_df) %in% c(matching_L_R_pairs$receptor_vector[[i]])))
     # Call the function
     ## global1 with null_expression_f works
-    averageResult <- Global_Permutations(permutationMatrix,
-                                         permut_null_regionMatrix,
-                                         permut_col,
-                                         cellPropMatrix,
-                                         GeneSpotMatrix,
-                                         LigandVectorIndex,
-                                         ReceptorVectorIndex,
-                                         null_expression_f,
-                                         nboot)
+    averageResult <- .Call("_SpaCCI_Local_Regional_Permutations",
+                           permutationMatrix,
+                           permut_col,
+                           cellPropMatrix,
+                           GeneSpotMatrix,
+                           LigandVectorIndex,
+                           ReceptorVectorIndex,
+                           null_expression,
+                           nboot)
+
+
+    #averageResult <- Global_Permutations(permutationMatrix,
+    #                                     permut_null_regionMatrix,
+    #                                     permut_col,
+    #                                     cellPropMatrix,
+    #                                     GeneSpotMatrix,
+    #                                     LigandVectorIndex,
+    #                                     ReceptorVectorIndex,
+    #                                     null_expression_f,
+    #                                     nboot)
 
 
 
@@ -725,7 +757,7 @@ SpaCCI_global <- function(gene_spot_df,
 
   close(con = pb)
 
-  print("writing data frame")
+  message("writing data frame")
   ##############
 
   table <- lapply(seq_along(output), function(i) {

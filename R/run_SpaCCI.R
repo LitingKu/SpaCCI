@@ -40,32 +40,33 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
-#' # Run global analysis
+#' library(SpaCCI)
+#' library(nnls)
+#' #Load the example data
+#' data(test_data)
+#' gene_spot_df <- test_data$gene_spot_df
+#' cell_prop_df <- test_data$cell_prop_df
+#' spatial_coords_df <- test_data$spatial_coords_df
+#'
+#' result <- LR_database(species = "Human",
+#'                       database_name = "CellChat",
+#'                       gene_spot_expression_dataframe = gene_spot_df)
+#'# global
 #' result_global <- run_SpaCCI(gene_spot_expression_dataframe = gene_spot_df,
 #'                             spot_cell_proportion_dataframe = cell_prop_df,
 #'                             spatial_coordinates_dataframe = spatial_coords_df,
-#'                             LR_database_list = LR_database("Human", "CellChat", gene_spot_df),
+#'                             LR_database_list = result,
 #'                             analysis_scale = "global")
 #'
-#' # Run regional analysis
-#' result_regional <- run_SpaCCI(gene_spot_expression_dataframe = gene_spot_df,
-#'                               spot_cell_proportion_dataframe = cell_prop_df,
-#'                               spatial_coordinates_dataframe = spatial_coords_df,
-#'                               LR_database_list = LR_database("Human", "CellChat", gene_spot_df),
-#'                               analysis_scale = "regional",
-#'                               region_spot_IDs = c("Spot1", "Spot2", "Spot3"))
-#'
-#' # Run local analysis
-#' result_local <- run_SpaCCI(gene_spot_expression_dataframe = gene_spot_df,
-#'                            spot_cell_proportion_dataframe = cell_prop_df,
-#'                            spatial_coordinates_dataframe = spatial_coords_df,
-#'                            LR_database_list = LR_database("Human", "CellChat", gene_spot_df),
-#'                            specific_LR_pair = "LIGAND_RECEPTOR_PAIR_NAME",
-#'                            analysis_scale = "local",
-#'                            local_scale_proportion = 1,
-#'                            neighborhood_radius = 2.5)
-#' }
+#' # local
+#'result_local <- run_SpaCCI(gene_spot_expression_dataframe = gene_spot_df,
+#'                           spot_cell_proportion_dataframe = cell_prop_df,
+#'                           spatial_coordinates_dataframe = spatial_coords_df,
+#'                           LR_database_list = result,
+#'                           specific_LR_pair = "EDN2_EDNRA",
+#'                           analysis_scale = "local",
+#'                           local_scale_proportion = 0.1,
+#'                           neighborhood_radius = 2.5)
 #'
 #' @export
 #'
@@ -106,7 +107,7 @@ run_SpaCCI <- function(gene_spot_expression_dataframe,
     if (is.null(specific_LR_pair)) {
       stop("For localized detection, please specify the Ligand-Receptor pair names as a vector.\nUsers can check the Ligand-Receptor pair names by looking into the rownames of LR_database_list$possible_LR_pairs_info.")
     } else {
-      print(paste0("Now analyzing localized detection using ", local_scale_proportion * 100, "% of spots in the whole slide, with a radius of ", neighborhood_radius, "."))
+      message(paste0("Now analyzing localized detection using ", local_scale_proportion * 100, "% of spots in the whole slide, with a radius of ", neighborhood_radius, "."))
 
       specific_LR <- LR_database_list$possible_LR_pairs[specific_LR_pair,]
       specific_LR_info <- LR_database_list$possible_LR_pairs_info[specific_LR_pair,]

@@ -16,15 +16,13 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
-#' gene_spot_expression_dataframe <- matrix(
-#'       data = rnorm(1000), nrow = 100, ncol = 10)
-#' rownames(gene_spot_expression_dataframe) <-
-#'      paste0("Gene", 1:100) # should match the Human or Mouse gene symbol name
+#' library(SpaCCI)
+#' #Load the example data
+#' data(test_data)
+#' gene_spot_df <- test_data$gene_spot_df
 #' result <- LR_database(species = "Human",
 #'             database_name = "CellChat",
-#'             gene_spot_expression_dataframe = gene_spot_expression_dataframe)
-#' }
+#'             gene_spot_expression_dataframe = gene_spot_df)
 #' @export
 #'
 #'
@@ -78,11 +76,14 @@ LR_database <- function(species, database_name, gene_spot_expression_dataframe, 
 #'
 #' @examples
 #'
-#' \dontrun{
-#' gene_spot_expression_dataframe <- matrix(data = rnorm(1000), nrow = 100, ncol = 10)
-#' rownames(gene_spot_expression_dataframe) <- paste0("Gene", 1:100)
+#' \donttest{
+#' library(SpaCCI)
+#' #Load the example data
+#' load(system.file("extdata", "Tutorial_example_data.rda", package = "SpaCCI"))
+#' Example_Seurat <- NormalizeData(Example_Seurat)
+#' gene_spot_df <- as.data.frame(Example_Seurat@assays$Spatial@data)
 #' result <- possible_L_R_pairs_cellchat(CellChatDB.human,
-#'       gene_spot_expression_dataframe = gene_spot_expression_dataframe)
+#'       gene_spot_expression_dataframe = gene_spot_df)
 #' }
 #' @importFrom dplyr %>% filter select mutate arrange group_by summarise
 #'
@@ -152,13 +153,6 @@ possible_L_R_pairs_cellchat <- function(species, gene_spot_expression_dataframe,
 #'   \item{possible_L_R_pairs_details}{A data frame with detailed information about the identified L-R pairs, including their original annotations from the CellPhoneDB dataset.}
 #' }
 #'
-#' @examples
-#' \dontrun{
-#' gene_spot_expression_dataframe <- matrix(data = rnorm(1000), nrow = 100, ncol = 10)
-#' rownames(gene_spot_expression_dataframe) <- paste0("Gene", 1:100)
-#' result <- possible_L_R_pairs_cellphoneDB(
-#'    gene_spot_expression_dataframe = gene_spot_expression_dataframe)
-#' }
 #'
 #' @importFrom dplyr rename %>% filter select mutate arrange group_by summarise
 #' @importFrom utils read.csv
@@ -220,15 +214,6 @@ possible_L_R_pairs_cellphoneDB <- function(gene_spot_expression_dataframe, perce
 #'   \item{possible_L_R_pairs_details}{A data frame with detailed information about the identified L-R pairs, including their original annotations from the Cellinker dataset.}
 #' }
 #'
-#' @examples
-#' \dontrun{
-#' gene_spot_expression_dataframe <- matrix(data = rnorm(1000), nrow = 100, ncol = 10)
-#' rownames(gene_spot_expression_dataframe) <- paste0("Gene", 1:100)
-#' result <- possible_L_R_pairs_Cellinker(species = "Human",
-#'            gene_spot_expression_dataframe = gene_spot_expression_dataframe)
-#' result <- possible_L_R_pairs_Cellinker(species = "Mouse",
-#'            gene_spot_expression_dataframe = gene_spot_expression_dataframe)
-#' }
 #' @importFrom dplyr rename %>% filter select mutate arrange group_by summarise
 #' @importFrom utils read.delim
 #'
@@ -290,13 +275,6 @@ possible_L_R_pairs_Cellinker <- function(species,  gene_spot_expression_datafram
 #'   \item{possible_L_R_pairs_details}{A data frame with detailed information about the identified L-R pairs, including their original annotations from the ICELLNET dataset.}
 #' }
 #'
-#' @examples
-#' \dontrun{
-#' gene_spot_expression_dataframe <- matrix(data = rnorm(1000), nrow = 100, ncol = 10)
-#' rownames(gene_spot_expression_dataframe) <- paste0("Gene", 1:100)
-#' result <- possible_L_R_pairs_ICELLNET(
-#'      gene_spot_expression_dataframe = gene_spot_expression_dataframe)
-#' }
 #' @importFrom utils read.csv
 #'
 #' @export
@@ -360,11 +338,6 @@ possible_L_R_pairs_ICELLNET <- function(gene_spot_expression_dataframe, percenta
 #'   \item{possible_L_R_pairs_details}{A data frame with detailed information about the identified L-R pairs, including their original annotations from the ConnectomeDB 2020 dataset.}
 #' }
 #'
-#' @examples
-#' \dontrun{
-#' # Example usage:
-#' result <- possible_L_R_pairs_connectome(gene_spot_expression_dataframe)
-#'}
 #' @export
 
 possible_L_R_pairs_connectome <- function(gene_spot_expression_dataframe, percentage ){

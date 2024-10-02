@@ -39,21 +39,18 @@ A plot object showing the localized interaction patterns. The plot will be gener
 This function provides a unified interface to visualize the localized cell-cell interaction patterns inferred by SpaCCI, either using a Seurat object with a spatial image or a spatial coordinates data frame.
 }
 \examples{
-\dontrun{
 # Plot localized SpaCCI results using Seurat object
-Result <- run_SpaCCI(..., analysis_scale = "local",...)
-plot_SpaCCI_local(Seurat_Object = seurat_object,
-                  SpaCCI_local_Result_List = Result,
-                  Ligand_cell_type = "Beta_cells",
-                  Receptor_cell_type = "T_cells",
-                  spot_plot_size = 3)
+library(SpaCCI)
+data(result_local)
+data(test_data)
+spatial_coords_df <- test_data$spatial_coords_df
+#plot_SpaCCI_local(Seurat_Object = seurat_object,.....)
 
 # Plot localized SpaCCI results using spatial coordinates
-plot_SpaCCI_local(spatial_coordinates_dataframe = spatial_coords,
-                  SpaCCI_local_Result_List = Result,
-                  Ligand_cell_type = "Beta_cells",
-                  Receptor_cell_type = "T_cells",
+plot_SpaCCI_local(spatial_coordinates_dataframe = spatial_coords_df,
+                  SpaCCI_local_Result_List = result_local,
+                  Ligand_cell_type = "beta",
+                  Receptor_cell_type = "delta",
                   spot_plot_size = 3)
-}
 
 }

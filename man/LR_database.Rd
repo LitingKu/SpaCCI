@@ -31,13 +31,11 @@ A list containing:
 This function identifies possible ligand-receptor (L-R) pairs for cell-cell communication analysis using a selected database. It checks for the presence of all genes involved in each L-R pair within the provided gene expression matrix, filtering based on a specified expression percentage threshold. The function supports multiple databases including CellChat, CellPhoneDB, Cellinker, ICELLNET, and ConnectomeDB.
 }
 \examples{
-\dontrun{
-gene_spot_expression_dataframe <- matrix(
-      data = rnorm(1000), nrow = 100, ncol = 10)
-rownames(gene_spot_expression_dataframe) <-
-     paste0("Gene", 1:100) # should match the Human or Mouse gene symbol name
+library(SpaCCI)
+#Load the example data
+data(test_data)
+gene_spot_df <- test_data$gene_spot_df
 result <- LR_database(species = "Human",
             database_name = "CellChat",
-            gene_spot_expression_dataframe = gene_spot_expression_dataframe)
-}
+            gene_spot_expression_dataframe = gene_spot_df)
 }

@@ -39,10 +39,10 @@ The localized plot from the inferred cell-cell interaction on the local scale.
 Visualize the inferred cell-cell interaction localized pattern if NOT using Seurat Object
 }
 \examples{
-\dontrun{
+\donttest{
 # Run localized hotspot plot
 Result <- run_SpaCCI(..., analysis_scale = "local",...)
-local_plot <- plot_localized(Seurat_object = gene_spot_df,
+local_plot <- plot_localized(spatial_coord = spatial_coords_df,
                             resultdf_list = Result$dataframelist,
                             RegionIDs_matrix = Result$RegionIDs_matrix,
                             celltype_ligand = "Beta_cells",

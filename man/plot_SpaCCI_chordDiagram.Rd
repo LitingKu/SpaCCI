@@ -33,33 +33,15 @@ A chord diagram plot visualizing the significant cell-cell interactions.
 This function generates a chord diagram to visualize cell-cell interactions based on ligand-receptor pairs. The interactions can be filtered by specific cell types, pathways, or interaction names.
 }
 \examples{
-\dontrun{
-
-# Run global analysis
-result_global <- run_SpaCCI(gene_spot_expression_dataframe = gene_spot_df,
-                            spot_cell_proportion_dataframe = cell_prop_df,
-                            spatial_coordinates_dataframe = spatial_coords_df,
-                            LR_database_list = LR_database("Human", "CellChat", gene_spot_df),
-                            analysis_scale = "global")
-
-# Run the result heatmap for global analysis
+library(SpaCCI)
+library(dplyr)
+library(circlize)
+data(result_global)
+celltypes <- c("beta" , "delta" , "ductal","macrophage",
+                "activated_stellate", "quiescent_stellate")
+# Run the result chordDiagram for global analysis
 plot_SpaCCI_chordDiagram(SpaCCI_Result_List = result_global,
-                         specific_celltypes = c(colnames(cell_prop_df)),
+                         specific_celltypes = c(celltypes),
                          L_R_pair_name  = "AREG_EGFR")
-
-# Run regional analysis
-result_regional <- run_SpaCCI(gene_spot_expression_dataframe = gene_spot_df,
-                              spot_cell_proportion_dataframe = cell_prop_df,
-                              spatial_coordinates_dataframe = spatial_coords_df,
-                              LR_database_list = LR_database("Human", "CellChat", gene_spot_df),
-                              analysis_scale = "regional",
-                              region_spot_IDs = c("Spot1", "Spot2", "Spot3"))
-
-# Run the result heatmap for regional analysis
-plot_SpaCCI_chordDiagram(SpaCCI_Result_List = result_regional,
-                         specific_celltypes = c(colnames(cell_prop_df)),
-                         L_R_pair_name  = "AREG_EGFR")
-
-}
 
 }
