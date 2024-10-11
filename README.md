@@ -18,7 +18,14 @@
 
 ## Installation
 
-SpaCCI R package can be easily installed from Github using devtools:
+SpaCCI R package can be easily installed from 
+1. r cran:
+
+```
+install.packages("SpaCCI")
+```
+
+2. Github using devtools:
 
 ```
 install.packages("devtools")
