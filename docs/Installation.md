@@ -9,7 +9,7 @@ header:
   overlay_filter: 0.2  # Adjust the darkness of the image
 ---
 
-<span style="font-family: 'ABeeZee', sans-serif; color: #94C47D;">SpaCCI</span> R package can be installed from GitHub using the following steps:
+<span style="font-family: 'ABeeZee', sans-serif; color: #94C47D;">SpaCCI</span> R package can be installed from r cran or GitHub using the following steps:
 
 ## Dependencies
 
@@ -19,6 +19,8 @@ header:
 
 ### 1. Install devtools
 
+if you want to download from r cran, you could skip this step.
+
     if (!requireNamespace("devtools", quietly = TRUE)) {
          install.packages("devtools")
     }
@@ -27,8 +29,14 @@ header:
 
 ### 2. Install <span style="font-family: 'ABeeZee', sans-serif; color: #94C47D;">SpaCCI</span> 
 
+Install from Github:
+
     devtools::install_github("LitingKu/SpaCCI")
-    
+
+
+Install from r cran:
+
+    install.packages("SpaCCI")
 
 ### 3. Load <span style="font-family: 'ABeeZee', sans-serif; color: #94C47D;">SpaCCI</span>    
 
@@ -36,7 +44,9 @@ header:
 
 
 The package has currently been tested on:
-- MAC: OS Sonoma (14.6.1)
+- macOS(arm64,x86_64)
+- linux(x86_64)
+- Windows(x86_64)
 
 
 
