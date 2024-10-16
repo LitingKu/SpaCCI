@@ -172,14 +172,14 @@ Ligand-Receptor pair or Pathway name.
                              specific_celltypes = c(colnames(cell_prop_df)),
                              L_R_pair_name  = "PDGFA_PDGFRB")
 
-![](LG3_chord_PDGFA_PDGFRB.pdf)
+![](LG3_chord_PDGFA_PDGFRB.png)
 
     # plot the result with chordDiagram while selecting specific pathway name
     plot_SpaCCI_chordDiagram(SpaCCI_Result_List = result_global,
                       specific_celltypes = c(colnames(cell_prop_df)),
                       pathway_name  = "SPP1")
 
-![](LG3_chord_SPP1.pdf)
+![](LG3_chord_SPP1.png)
 
 #### (B) Regional analysis
 
