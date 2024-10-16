@@ -232,7 +232,7 @@ Finally we run the local analysis on the whole slide with specifying
                                spot_cell_proportion_dataframe = cell_prop_df,
                                spatial_coordinates_dataframe = spatial_coords_df,
                                LR_database_list = LRDB,
-                               specific_LR_pair = "EDN2_EDNRA",
+                               specific_LR_pair = "INS_INSSR",
                                analysis_scale = "local",
                                local_scale_proportion = 1,
                                neighborhood_radius = 2.5)
@@ -242,11 +242,11 @@ Finally we run the local analysis on the whole slide with specifying
 Then we plot the localized plot to access the local signalling hotspot.
 
     # if you have the Seurat Object with image 
-    plot_SpaCCI_local(Seurat_Object = Example_Seurat,
+    plot_SpaCCI_local(Seurat_Object = LG3,
                       SpaCCI_local_Result_List = result_local,
-                      Ligand_cell_type = "ductal",
-                      Receptor_cell_type = "activated_stellate",
-                      spot_plot_size = 6)
+                      Ligand_cell_type = "T.cell",
+                      Receptor_cell_type = "Fibroblast.cell",
+                      spot_plot_size = 3.5)
 
     ## [1] "plotting using Seurat image"
 
