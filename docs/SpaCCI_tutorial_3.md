@@ -1,5 +1,5 @@
 ---
-title: "Using Seurat Object"
+title: "Real 10X Visium Data"
 layout: single
 permalink: /docs/tutorial3/
 toc: true
@@ -31,7 +31,7 @@ We first load the package, we will read the 10X Visium data using Seurat.
     library(SpaCCI)
     library(Seurat)
     # Load the 10X Visium data
-    LG3 <- Load10X_Spatial( data.dir = "/Users/lku/Desktop/CCI/data/LG3", # please change to your data directory
+    LG3 <- Load10X_Spatial( data.dir = "/path/to/data/", # please change to your data directory
                             filename = "GSM7421782_LG_3_filtered_feature_bc_matrix.h5",
                             assay = "Spatial",
                             slice = "slice1",
