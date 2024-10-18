@@ -252,6 +252,8 @@ Here we run the regional analysis on the whole slide with selected
 Finally we run the local analysis on the whole slide with specifying
 `specific_LR_pair`.
 
+**NOTE:** Local analysis aim to find the localized interaction hotspots, if you find the result are unable to show the hotspots, you could adjust the `neighborhood_radius` to make it larger.
+
     # local analysis
     result_local <- run_SpaCCI(gene_spot_expression_dataframe = gene_spot_df,
                                spot_cell_proportion_dataframe = cell_prop_df,
