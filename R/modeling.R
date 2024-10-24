@@ -180,8 +180,9 @@ SpaCCI_local <- function(gene_spot_df,
     IDs <- Find_regional_IDs(gene_spot_df,spatial_coord, centerIDs[i], enhanced = FALSE, radius = radius, avern = 5)$closeID
     RegionIDs_matrix[[centerIDs[i]]] <- IDs
   }
-
-
+  RegionIDs_matrix <- RegionIDs_matrix[sapply(RegionIDs_matrix, length) >= 6] # remove those that don't have enough neighborhoods
+  centerIDs <- names(RegionIDs_matrix) # update cencter ID
+  
   ## prepared for permutation
   cellPropMatrix <- as.matrix(spot_cell_prop_df)
   GeneSpotMatrix <- as.matrix(gene_spot_df)
@@ -205,6 +206,10 @@ SpaCCI_local <- function(gene_spot_df,
     for (i in seq_along(premut_center)) {
       region_ids <- random_region(spatial_coord, premut_center[i], n_ids = length(ids))
       region_permut_index[[i]] <- as.numeric(match(region_ids, colnames(gene_spot_df) ))
+      if(any(is.na( region_permut_index[[i]]))){
+        stop("Please make sure the rownames of spatial_coordinates_dataframe match the colnames of gene_spot_expression_dataframe")
+      }
+      
     }
 
     # Optionally, convert list to a data frame or matrix if all outputs have the same length
