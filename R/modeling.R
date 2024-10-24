@@ -175,6 +175,7 @@ SpaCCI_local <- function(gene_spot_df,
   centerIDs <- sample(c(colnames(gene_spot_df)), size = round(ncol(gene_spot_df)*prop) )
   #centerIDs <- c(colnames(gene_spot_df))
   RegionIDs_matrix <- list()
+  message(paste0("Now finding the neighborhoods for ",round(ncol(gene_spot_df)*prop), " spots"))
   for ( i in 1:length(centerIDs)){
     IDs <- Find_regional_IDs(gene_spot_df,spatial_coord, centerIDs[i], enhanced = FALSE, radius = radius, avern = 5)$closeID
     RegionIDs_matrix[[centerIDs[i]]] <- IDs
@@ -193,6 +194,8 @@ SpaCCI_local <- function(gene_spot_df,
     nboot <- as.numeric(floor(nrow(spot_cell_prop_df)/500)*100)
     if (nboot == 0){
       nboot <- 1
+    }else if(nboot > 1000){
+      nboot <- 1000
     }
 
     premut_center <- sample(colnames(gene_spot_df[,-which(colnames(gene_spot_df) %in% ids )]), size = nboot)
