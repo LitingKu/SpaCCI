@@ -109,8 +109,8 @@ run_SpaCCI <- function(gene_spot_expression_dataframe,
     } else {
       message(paste0("Now analyzing localized detection using ", local_scale_proportion * 100, "% of spots in the whole slide, with a radius of ", neighborhood_radius, "."))
 
-      specific_LR <- LR_database_list$possible_LR_pairs[specific_LR_pair,]
-      specific_LR_info <- LR_database_list$possible_LR_pairs_info[specific_LR_pair,]
+      specific_LR <- LR_database_list$possible_LR_pairs[which(LR_database_list$possible_LR_pairs_info$interaction_name %in% specific_LR_pair),]
+      specific_LR_info <- LR_database_list$possible_LR_pairs_info[which(LR_database_list$possible_LR_pairs_info$interaction_name %in% specific_LR_pair),]
 
       result <- SpaCCI_local(gene_spot_df = gene_spot_expression_dataframe,
                              spot_cell_prop_df = spot_cell_proportion_dataframe,
