@@ -3,22 +3,20 @@
 \docType{data}
 \name{result_local}
 \alias{result_local}
-\title{result_local data for SpaCCI}
+\title{result_local data and spatial coordinates for SpaCCI
+Local Regional Data}
 \format{
 A list containing:
 \describe{
-  \item{dataframelist}{A list of data frame of the p-value reults of each spatial neighborhood.}
-  \item{RegionIDs_matrix}{A list of matrix contains the spot IDs of each spatial neighborhood.}
+  \item{dataframelist}{A list of data frames, each containing p-value results for spatial neighborhoods.}
+  \item{RegionIDs_matrix}{A list of matrices, each containing the spot IDs for specific neighborhoods.}
 }
 }
 \usage{
 data(result_local)
 }
 \description{
-This example dataset is the result of running the \code{run_SpaCCI} function.
-It contains the inferred cell-cell interactions across the global scale.
-}
-\details{
+This dataset contains the results of spatial neighborhood analyses.
 These objects can be used for testing and running example analyses with the SpaCCI package.
 }
 \examples{

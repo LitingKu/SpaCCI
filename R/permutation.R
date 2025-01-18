@@ -4,7 +4,6 @@
 #' This function performs global permutations on the spatial transcriptomics data.
 #'
 #' @param permutationMatrix A matrix containing permutations.
-#' @param permut_null_regionMatrix A matrix of null region permutations.
 #' @param permut_col A column matrix of permutations.
 #' @param cellPropMatrix A matrix of cell type proportions.
 #' @param spotGeneMatrix A matrix of gene expressions at spots.
@@ -16,7 +15,7 @@
 #' @export
 #' @useDynLib SpaCCI, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
-Global_Permutations <- function(permutationMatrix, permut_null_regionMatrix, permut_col, cellPropMatrix, spotGeneMatrix, LigandVectorIndex, ReceptorVectorIndex, null_expression, nBoot) {
+Global_Permutations <- function(permutationMatrix, permut_col, cellPropMatrix, spotGeneMatrix, LigandVectorIndex, ReceptorVectorIndex, null_expression, nBoot) {
   # This function is implemented in C++.
   # No R code is necessary here.
 }

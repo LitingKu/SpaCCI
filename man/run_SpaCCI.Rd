@@ -67,6 +67,8 @@ The function supports three scales of analysis:
 \examples{
 library(SpaCCI)
 library(nnls)
+library(FNN)
+library(Matrix)
 #Load the example data
 data(test_data)
 gene_spot_df <- test_data$gene_spot_df

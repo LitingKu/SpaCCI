@@ -30,13 +30,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // Global_Permutations
-arma::mat Global_Permutations(const arma::mat& permutationMatrix, const arma::mat& permut_null_regionMatrix, const arma::mat& permut_col, const arma::mat& cellPropMatrix, const arma::mat& spotGeneMatrix, const arma::vec& LigandVectorIndex, const arma::vec& ReceptorVectorIndex, const arma::mat& null_expression, int nBoot);
-RcppExport SEXP _SpaCCI_Global_Permutations(SEXP permutationMatrixSEXP, SEXP permut_null_regionMatrixSEXP, SEXP permut_colSEXP, SEXP cellPropMatrixSEXP, SEXP spotGeneMatrixSEXP, SEXP LigandVectorIndexSEXP, SEXP ReceptorVectorIndexSEXP, SEXP null_expressionSEXP, SEXP nBootSEXP) {
+arma::mat Global_Permutations(const arma::mat& permutationMatrix, const arma::mat& permut_col, const arma::mat& cellPropMatrix, const arma::mat& spotGeneMatrix, const arma::vec& LigandVectorIndex, const arma::vec& ReceptorVectorIndex, const arma::mat& null_expression, int nBoot);
+RcppExport SEXP _SpaCCI_Global_Permutations(SEXP permutationMatrixSEXP, SEXP permut_colSEXP, SEXP cellPropMatrixSEXP, SEXP spotGeneMatrixSEXP, SEXP LigandVectorIndexSEXP, SEXP ReceptorVectorIndexSEXP, SEXP null_expressionSEXP, SEXP nBootSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type permutationMatrix(permutationMatrixSEXP);
-    Rcpp::traits::input_parameter< const arma::mat& >::type permut_null_regionMatrix(permut_null_regionMatrixSEXP);
     Rcpp::traits::input_parameter< const arma::mat& >::type permut_col(permut_colSEXP);
     Rcpp::traits::input_parameter< const arma::mat& >::type cellPropMatrix(cellPropMatrixSEXP);
     Rcpp::traits::input_parameter< const arma::mat& >::type spotGeneMatrix(spotGeneMatrixSEXP);
@@ -44,14 +43,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const arma::vec& >::type ReceptorVectorIndex(ReceptorVectorIndexSEXP);
     Rcpp::traits::input_parameter< const arma::mat& >::type null_expression(null_expressionSEXP);
     Rcpp::traits::input_parameter< int >::type nBoot(nBootSEXP);
-    rcpp_result_gen = Rcpp::wrap(Global_Permutations(permutationMatrix, permut_null_regionMatrix, permut_col, cellPropMatrix, spotGeneMatrix, LigandVectorIndex, ReceptorVectorIndex, null_expression, nBoot));
+    rcpp_result_gen = Rcpp::wrap(Global_Permutations(permutationMatrix, permut_col, cellPropMatrix, spotGeneMatrix, LigandVectorIndex, ReceptorVectorIndex, null_expression, nBoot));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_SpaCCI_Local_Regional_Permutations", (DL_FUNC) &_SpaCCI_Local_Regional_Permutations, 8},
-    {"_SpaCCI_Global_Permutations", (DL_FUNC) &_SpaCCI_Global_Permutations, 9},
+    {"_SpaCCI_Global_Permutations", (DL_FUNC) &_SpaCCI_Global_Permutations, 8},
     {NULL, NULL, 0}
 };
 

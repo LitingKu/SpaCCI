@@ -5,7 +5,7 @@ Local_Regional_Permutations <- function(permutationMatrix, permut_col, cellPropM
     .Call(`_SpaCCI_Local_Regional_Permutations`, permutationMatrix, permut_col, cellPropMatrix, spotGeneMatrix, LigandVectorIndex, ReceptorVectorIndex, null_expression, nBoot)
 }
 
-Global_Permutations <- function(permutationMatrix, permut_null_regionMatrix, permut_col, cellPropMatrix, spotGeneMatrix, LigandVectorIndex, ReceptorVectorIndex, null_expression, nBoot) {
-    .Call(`_SpaCCI_Global_Permutations`, permutationMatrix, permut_null_regionMatrix, permut_col, cellPropMatrix, spotGeneMatrix, LigandVectorIndex, ReceptorVectorIndex, null_expression, nBoot)
+Global_Permutations <- function(permutationMatrix, permut_col, cellPropMatrix, spotGeneMatrix, LigandVectorIndex, ReceptorVectorIndex, null_expression, nBoot) {
+    .Call(`_SpaCCI_Global_Permutations`, permutationMatrix, permut_col, cellPropMatrix, spotGeneMatrix, LigandVectorIndex, ReceptorVectorIndex, null_expression, nBoot)
 }
 

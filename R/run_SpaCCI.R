@@ -42,6 +42,8 @@
 #' @examples
 #' library(SpaCCI)
 #' library(nnls)
+#' library(FNN)
+#' library(Matrix)
 #' #Load the example data
 #' data(test_data)
 #' gene_spot_df <- test_data$gene_spot_df
@@ -89,6 +91,7 @@ run_SpaCCI <- function(gene_spot_expression_dataframe,
   if (analysis_scale == "global") {
     result <- SpaCCI_global(gene_spot_df = gene_spot_expression_dataframe,
                             spot_cell_prop_df = spot_cell_proportion_dataframe,
+                            spatial_coord = spatial_coordinates_dataframe,
                             matching_L_R_pairs = LR_database_list$possible_LR_pairs,
                             matching_L_R_pairs_info = LR_database_list$possible_LR_pairs_info)
 
@@ -98,6 +101,7 @@ run_SpaCCI <- function(gene_spot_expression_dataframe,
     } else {
       result <- SpaCCI_region(gene_spot_df = gene_spot_expression_dataframe,
                               spot_cell_prop_df = spot_cell_proportion_dataframe,
+                              spatial_coord = spatial_coordinates_dataframe,
                               region_spot_IDs = region_spot_IDs,
                               matching_L_R_pairs = LR_database_list$possible_LR_pairs,
                               matching_L_R_pairs_info = LR_database_list$possible_LR_pairs_info)

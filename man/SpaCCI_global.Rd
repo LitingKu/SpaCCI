@@ -7,6 +7,7 @@
 SpaCCI_global(
   gene_spot_df,
   spot_cell_prop_df,
+  spatial_coord,
   matching_L_R_pairs,
   matching_L_R_pairs_info
 )
@@ -15,6 +16,8 @@ SpaCCI_global(
 \item{gene_spot_df}{A data frame where the rows are genes and the columns are spots (Spot_IDs), representing gene expression levels across spatial spots.}
 
 \item{spot_cell_prop_df}{A data frame of cell type proportions for each spot. The rows represent spots (Spot_IDs), and the columns represent different cell types.}
+
+\item{spatial_coord}{A data frame of the spatial coordinates. The column names should include `c("Spot_ID", "imagerow", "imagecol")`, and the row names must be the Spot_IDs, which is the same as the row names in the cell type proportion data frame or the column names of the gene*spot expression data frame.}
 
 \item{matching_L_R_pairs}{A data frame containing matching ligand-receptor pairs. Each row corresponds to a ligand-receptor pair, with columns for \code{ligand_vector} and \code{receptor_vector}.}
 

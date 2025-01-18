@@ -1,4 +1,5 @@
 #include <RcppArmadillo.h>
+#include <iostream>
 //[[Rcpp::depends(RcppArmadillo)]]
 using namespace Rcpp;
 using namespace arma;
@@ -235,117 +236,99 @@ arma::mat Local_Regional_Permutations(const arma::mat& permutationMatrix,
 
 
 
-// pre-function for global permutation
+
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+// Global permutation
 List Global_permuteIndices(const arma::mat& permutationMatrix,
-                                   const arma::mat& permut_null_regionMatrix,
-                                   const arma::mat& permut_col,
-                                   const arma::mat& cellPropMatrix,
-                                   const arma::mat& spotGeneMatrix,
-                                   const arma::vec& LigandVectorIndex,
-                                   const arma::vec& ReceptorVectorIndex,
-                                   const arma::mat& null_expression,
-                                   unsigned int nE) {
-
+                           const arma::mat& permut_col,
+                           const arma::mat& cellPropMatrix,
+                           const arma::mat& spotGeneMatrix,
+                           const arma::vec& LigandVectorIndex,
+                           const arma::vec& ReceptorVectorIndex,
+                           const arma::mat& null_expression,
+                           unsigned int nE) {
+  
   arma::vec permutedIndices = permutationMatrix.col(nE - 1);
-
-  arma::vec col_indices = permut_col.col(nE - 1);
-
-  arma::vec permut_null_regionIndices = permut_null_regionMatrix.col(0);
   arma::uvec uPermutedIndices = conv_to<uvec>::from(permutedIndices - 1);
-  arma::uvec upermut_null_regionIndices = conv_to<uvec>::from(permut_null_regionIndices - 1);
+  
+  //arma::mat selectCellProp = cellPropMatrix.rows(uPermutedIndices);
+  
+  arma::vec col_indices = permut_col.col(nE - 1);
   arma::uvec ucol_indices = conv_to<uvec>::from(col_indices - 1);
-  //std::cout << "ucol_indices:\n" << ucol_indices << std::endl;
-
-  arma::mat selectCellProp = cellPropMatrix.rows(uPermutedIndices);
-
+  arma::mat selectpre = cellPropMatrix.rows(uPermutedIndices);
+  arma::mat selectCellProp = selectpre.cols(ucol_indices);
+  
   arma::mat avgLigand(selectCellProp.n_cols, LigandVectorIndex.size());
   arma::mat avgReceptor(selectCellProp.n_cols, ReceptorVectorIndex.size());
-
-  arma::rowvec col_sums = sum(selectCellProp, 0);
+  
+  arma::rowvec col_sums = sum(cellPropMatrix, 0);
   arma::vec col_sums_transposed = col_sums.t();
   double n = selectCellProp.n_rows;
-
+  
   for (size_t l = 0; l < LigandVectorIndex.size(); ++l) {
     // Extract expression levels for the specified gene across selected spots
     arma::vec exp_L_vector = spotGeneMatrix.row( LigandVectorIndex[l] - 1 ).t();
-    exp_L_vector = exp_L_vector.elem(upermut_null_regionIndices);
     arma::mat exp_L_matrix = exp_L_vector.as_col();
     arma::vec exp = callNnls(selectCellProp, exp_L_matrix );
     avgLigand.col(l) = exp;
+    
   }
-
+  
   for (size_t r = 0; r < ReceptorVectorIndex.size(); ++r) {
     arma::vec exp_R_vector = spotGeneMatrix.row(ReceptorVectorIndex[r] - 1).t();
-    exp_R_vector = exp_R_vector.elem(upermut_null_regionIndices);
     arma::mat exp_R_matrix = exp_R_vector.as_col();
     arma::vec exp = callNnls(selectCellProp, exp_R_matrix );
-
     avgReceptor.col(r) = exp;
-
+    
   }
-
-
+  
   arma::vec finalAvgLigand = geometricMean(avgLigand);
   arma::vec finalAvgReceptor = geometricMean(avgReceptor);
-
-
+  
+  
   arma::vec norm_col_sums = col_sums_transposed / n;
-  //std::cout << "Normalized Column Sums:\n" << norm_col_sums << std::endl;
-
-
   arma::mat outer_product = norm_col_sums * norm_col_sums.t(); // .t() for transpose
-
-  //std::cout << "Outer Product:\n" << outer_product << std::endl;
-
-
   arma::mat interact = finalAvgLigand * finalAvgReceptor.t();
-
-  //std::cout << "interact:\n" << interact << std::endl;
-
-  arma::mat transformed_interact = interact / (0.5 + interact);
-
-  //std::cout << "Transformed Interact Matrix:\n" << transformed_interact << std::endl;
-
+  
+  arma::mat transformed_interact = (interact / (interact + 0.5) );
   arma::mat per_result = transformed_interact % outer_product ;
-
-  //std::cout << "Element-wise Product of Transformed and Outer Product:\n" << per_result << std::endl;
-
-  arma::mat null_expression1 = null_expression;
-
-
-  //std::cout << "Transformed Interact Matrix:\n" << null_expression1 << std::endl;
-
+  
+  
+  
   // Compute the outer product
-  arma::umat result = (per_result > null_expression1 );
-
-
+  arma::umat result = (per_result > null_expression );
+  
+  //std::cout << "larger:\n" << result << std::endl;
+  
   // Create a list to return the results
   List results;
   results["interact"] = result;
   return  results;
 }
 
-// function for global permutation
+
+
+// function for local and regional permutation
 // [[Rcpp::export]]
 arma::mat Global_Permutations(const arma::mat& permutationMatrix,
-                                       const arma::mat& permut_null_regionMatrix,
-                                       const arma::mat& permut_col,
-                                       const arma::mat& cellPropMatrix,
-                                       const arma::mat& spotGeneMatrix,
-                                       const arma::vec& LigandVectorIndex,
-                                       const arma::vec& ReceptorVectorIndex,
-                                       const arma::mat& null_expression,
-                                       int nBoot) {
+                              const arma::mat& permut_col,
+                              const arma::mat& cellPropMatrix,
+                              const arma::mat& spotGeneMatrix,
+                              const arma::vec& LigandVectorIndex,
+                              const arma::vec& ReceptorVectorIndex,
+                              const arma::mat& null_expression,
+                              int nBoot) {
   // Initialize a matrix to hold the sum of all interactions
   arma::mat sumInteraction;
   bool firstIteration = true;
-
+  
   for (int nE = 1; nE <= nBoot; ++nE) {
-    List result = Global_permuteIndices(permutationMatrix,permut_null_regionMatrix,permut_col,  cellPropMatrix, spotGeneMatrix,
-                                                LigandVectorIndex, ReceptorVectorIndex,
-                                                null_expression, nE);
+    List result = Global_permuteIndices(permutationMatrix, permut_col,cellPropMatrix, spotGeneMatrix,
+                                        LigandVectorIndex, ReceptorVectorIndex,
+                                        null_expression, nE);
     arma::mat interact = as<mat>(result["interact"]);
-
+    
     if (firstIteration) {
       sumInteraction = interact;
       firstIteration = false;
@@ -353,11 +336,18 @@ arma::mat Global_Permutations(const arma::mat& permutationMatrix,
       sumInteraction += interact; // Sum the interaction matrices
     }
   }
-
+  
   // Divide the sumInteraction matrix by the number of bootstraps (nBoot) to get the average
   arma::mat averageInteraction = sumInteraction / nBoot;
   return averageInteraction;
 }
+
+
+
+
+
+
+
 
 
 

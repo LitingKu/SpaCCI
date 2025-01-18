@@ -6,7 +6,6 @@
 \usage{
 Global_Permutations(
   permutationMatrix,
-  permut_null_regionMatrix,
   permut_col,
   cellPropMatrix,
   spotGeneMatrix,
@@ -18,8 +17,6 @@ Global_Permutations(
 }
 \arguments{
 \item{permutationMatrix}{A matrix containing permutations.}
-
-\item{permut_null_regionMatrix}{A matrix of null region permutations.}
 
 \item{permut_col}{A column matrix of permutations.}
 

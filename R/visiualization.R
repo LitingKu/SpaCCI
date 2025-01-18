@@ -17,16 +17,17 @@
 #' @examples
 #' # Plot localized SpaCCI results using Seurat object
 #' library(SpaCCI)
+#' library(dplyr)
 #' data(result_local)
-#' data(test_data)
-#' spatial_coords_df <- test_data$spatial_coords_df
+#' data(result_local_spatial_coords_df)
+#' spatial_coords_df <- result_local_spatial_coords_df
 #' #plot_SpaCCI_local(Seurat_Object = seurat_object,.....)
 #'
 #' # Plot localized SpaCCI results using spatial coordinates
 #' plot_SpaCCI_local(spatial_coordinates_dataframe = spatial_coords_df,
 #'                   SpaCCI_local_Result_List = result_local,
-#'                   Ligand_cell_type = "beta",
-#'                   Receptor_cell_type = "delta",
+#'                   Ligand_cell_type = "ductal",
+#'                   Receptor_cell_type = "activated_stellate",
 #'                   spot_plot_size = 3)
 #'
 #' @export
@@ -71,6 +72,82 @@ plot_SpaCCI_local <- function(Seurat_Object = NULL,
   return(local_plot)
 
 }
+
+
+#' Plot SpaCCI Localized Interaction Strength Results
+#'
+#' This function provides a unified interface to visualize the localized cell-cell interaction strength patterns inferred by SpaCCI, either using a Seurat object with a spatial image or a spatial coordinates data frame.
+#'
+#' @param Seurat_Object Optional. A Seurat object containing spatial data. If provided, the function will plot the interaction patterns on the tissue image.
+#' @param spatial_coordinates_dataframe Optional. A data frame containing the spatial coordinates of the spots. The columns should include \code{"Spot_ID"}, \code{"imagerow"}, and \code{"imagecol"}. The row names must be the names of \code{"Spot_ID"}, matching those in the cell type proportion data frame or the gene expression data frame.
+#' @param SpaCCI_local_Result_List A list containing the results from a SpaCCI local analysis. This list should include \code{dataframelist} and \code{RegionIDs_matrix}, which are the outputs from \code{run_SpaCCI(..., analysis_scale = "local",...)}.
+#' @param Ligand_cell_type The name of the ligand cell type to plot. This should match the cell type names used in the \code{run_SpaCCI} analysis.
+#' @param Receptor_cell_type The name of the receptor cell type to plot. This should match the cell type names used in the \code{run_SpaCCI} analysis.
+#' @param spot_plot_size A numeric value controlling the size of the spots in the plot.
+#' @param specific_LR_pair_name Optional. The name of a specific ligand-receptor pair to plot. If provided, the plot will focus on this interaction. The name should match those in the \code{SpaCCI_local_Result_List$dataframelist}.
+#'
+#' @return A plot object showing the localized interaction strength patterns. The plot will be generated using either the Seurat object or the spatial coordinates data frame, depending on the input provided.
+#'
+#' @examples
+#' # Plot localized SpaCCI results using Seurat object
+#' library(SpaCCI)
+#' library(dplyr)
+#' data(result_local)
+#' data(result_local_spatial_coords_df)
+#' spatial_coords_df <- result_local_spatial_coords_df
+#' #plot_SpaCCI_local(Seurat_Object = seurat_object,.....)
+#'
+#' # Plot localized SpaCCI results using spatial coordinates
+#' plot_SpaCCI_local_Strength(spatial_coordinates_dataframe = spatial_coords_df,
+#'                            SpaCCI_local_Result_List = result_local,
+#'                            Ligand_cell_type = "ductal",
+#'                            Receptor_cell_type = "activated_stellate",
+#'                            spot_plot_size = 3)
+#'
+#' @export
+
+plot_SpaCCI_local_Strength <- function(Seurat_Object = NULL,
+                              spatial_coordinates_dataframe = NULL,
+                              SpaCCI_local_Result_List,
+                              Ligand_cell_type,
+                              Receptor_cell_type,
+                              spot_plot_size,
+                              specific_LR_pair_name = NULL){
+  
+  if (is.null(Seurat_Object) & is.null(spatial_coordinates_dataframe)){
+    stop("Please input either a Seurat_object with image or input a spatial_coordinates_dataframe")
+  }else if (!is.null(Seurat_Object)){
+    message("writing data frame")
+    message("plotting using Seurat image")
+    local_plot <- plot_Strength_Seurat(Seurat_object = Seurat_Object,
+                                        resultdf_list = SpaCCI_local_Result_List$dataframelist,
+                                        RegionIDs_matrix = SpaCCI_local_Result_List$RegionIDs_matrix,
+                                        celltype_ligand = Ligand_cell_type,
+                                        celltype_receptor = Receptor_cell_type,
+                                        plot_size = spot_plot_size ,
+                                        L_R_pair_name = specific_LR_pair_name)
+    
+  }else if(!is.null(spatial_coordinates_dataframe)){
+    message("writing data frame")
+    message("plotting using image spatial coordinates")
+    local_plot <- plot_Strength_localized(spatial_coord = spatial_coordinates_dataframe ,
+                                 resultdf_list = SpaCCI_local_Result_List$dataframelist,
+                                 RegionIDs_matrix = SpaCCI_local_Result_List$RegionIDs_matrix,
+                                 celltype_ligand = Ligand_cell_type,
+                                 celltype_receptor = Receptor_cell_type,
+                                 plot_size = spot_plot_size ,
+                                 L_R_pair_name = specific_LR_pair_name)
+    
+  }
+  
+  return(local_plot)
+  
+}
+
+
+
+
+
 
 
 # Plotting
@@ -203,6 +280,152 @@ plot_localized_Seurat <- function(Seurat_object,
 }
 
 
+
+#' Plot Localized Hotspot Strength Pattern on Seurat Object
+#'
+#' Visualize the inferred cell-cell interaction localized pattern on the tissue image with Seurat_object
+#' @param Seurat_object A Seurat object
+#' @param resultdf_list A result of data frame list from the output of \code{run_SpaCCI(..., analysis_scale = "local",...)} \code{`dataframelist`}
+#' @param RegionIDs_matrix A result of matrix list from the output of \code{run_SpaCCI(..., analysis_scale = "local",...)} \code{`RegionIDs_matrix`}
+#' @param celltype_ligand Ligand cell type string inputted by user, the name of the cell type should match the names in the \code{`spot_cell_proportion_dataframe`} during the \code{run_SpaCCI} analysis.
+#' @param celltype_receptor Receptor cell type string inputted by user, the name of the cell type should match the names in the \code{`spot_cell_proportion_dataframe`} during the \code{run_SpaCCI} analysis.
+#' @param plot_size As this function incorporate with \code{Seurat}'s \code{`SpatialFeaturePlot`}, this parameter could control the plotting size of the each spot.
+#' @param L_R_pair_name Initially this is set to \code{NULL}, if one is interested in a specific Ligand-Receptor pair, then one could specify the L_R_pair_name here. Note: the input name should match the L-R pair name exists in the dataframe in the output of SpaCCI_local "dataframelist".
+#' @importFrom Seurat SpatialFeaturePlot
+#' @importFrom ggplot2 ggplot aes geom_point scale_color_gradient2 labs xlim ylim theme element_blank element_text element_rect margin unit
+#' @importFrom dplyr %>% filter select mutate arrange group_by summarise
+#'
+#' @return The localized plot from the inferred cell-cell interaction on the local scale.
+#'
+#' @examples
+#' \donttest{
+#' # Not Run
+#'
+#' # Run localized hotspot plot
+#' Result <- run_SpaCCI(..., analysis_scale = "local",...)
+#' local_plot <- plot_Strength_Seurat(Seurat_object = gene_spot_df,
+#'                                     resultdf_list = Result$dataframelist,
+#'                                     RegionIDs_matrix = Result$RegionIDs_matrix,
+#'                                     celltype_ligand = "Beta_cells",
+#'                                     celltype_receptor = "T_ells",
+#'                                     plot_size = 3)
+#' }
+#'
+#' @export
+#'
+
+plot_Strength_Seurat <- function(Seurat_object,
+                                 resultdf_list,
+                                 RegionIDs_matrix,
+                                 celltype_ligand,
+                                 celltype_receptor,
+                                 plot_size,
+                                 L_R_pair_name = NULL){
+  
+  centerIDs <- names(resultdf_list)
+  inter_name <- lapply(resultdf_list, function(df){ g<- unique(df$interaction_name)})
+  inter_name <- unique(unlist(inter_name))
+  # Assuming 'resultdf_list' is your list of data frames
+  if (celltype_ligand == celltype_receptor){
+    cleaned_dfs <- lapply(resultdf_list, function(df) {
+      df <- df[which(df$Cell_type_Ligand == celltype_ligand & df$Cell_type_Receptor == celltype_receptor),]
+      nameL <- paste("Null_avg_L", celltype_ligand)
+      nameR <- paste("Null_avg_R", celltype_receptor)
+      
+      if (!is.null(L_R_pair_name)){
+        df_clean <- df[which( df$interaction_name %in% L_R_pair_name ), ]
+      }else {
+        df_clean <- df
+      }
+      # Return the cleaned data frame
+      return(df_clean)
+    })
+  }else{
+    cleaned_dfs <- lapply(resultdf_list, function(df) {
+      
+      df_clean <- df[which(df$Cell_type_Ligand == celltype_ligand & df$Cell_type_Receptor == celltype_receptor),]
+      if (!is.null(L_R_pair_name)){
+        df_clean <- df_clean[which( df_clean$interaction_name %in% L_R_pair_name ), ]
+      }
+      #df_clean <- df_clean[which(df_clean[[nameL]] != 0 & df_clean[[nameR]] != 0), ]
+      # Return the cleaned data frame
+      return(df_clean)
+    })
+  }
+  
+  # For each data frame, count the rows where 'strength' > 0
+  strength_values <- unlist(sapply(cleaned_dfs, function(df) {
+    if ("strength" %in% colnames(df)) {
+      if (length(df$strength) > 0) {
+        df$strength
+      } else {
+        0
+      }
+    } else {
+      0
+    }
+  }))
+  count_rows <- strength_values
+  g <- as.data.frame(count_rows)
+  Seurat_object@meta.data$CCIcount <- 0
+  
+  #################################################
+  for (row_name in rownames(g)) {
+    if (row_name %in% rownames(Seurat_object@meta.data)) {
+      Seurat_object@meta.data[row_name, "CCIcount"] <- g[row_name, "count_rows"]
+    }
+  }
+  
+  #SpatialFeaturePlot(Seurat_object, features = "CCIcount")
+  #p_center_only <- SpatialFeaturePlot(Seurat_object, features = "CCIcount",pt.size.factor = plot_size) + ggplot2::scale_fill_gradient2(low = "black", high = "yellow", mid = "purple", limits =c(0,max_value), midpoint = max_value/2 , space = "Lab")
+  df <- Seurat_object@meta.data
+  df <- df[,c("CCIcount"),drop=FALSE]
+  
+  reg <- data.frame(nrow = (rownames(Seurat_object@meta.data)), ncol = 0 )
+  rownames(reg) <- reg$nrow
+  reg$CCIcount <- 0
+  for (row_name in rownames(g)) {
+    if (row_name %in% rownames(reg)) {
+      reg[row_name, "CCIcount"] <- g[row_name, "count_rows"]
+    }
+  }
+  
+  # Add a column in reg for each centerID and initialize it to 0
+  for (id in centerIDs) { reg[[paste0(id)]] <- NA}
+  # Iterate over centerIDs and update the corresponding column in reg
+  for (id in centerIDs) {
+    # Get the corresponding IDs from RegionIDs_matrix
+    IDs <- RegionIDs_matrix[[id]]
+    # Update the corresponding column in reg for rows that match the IDs
+    reg[rownames(reg) %in% IDs , id] <- g[id, ]
+  }
+  
+  
+  row_means <- rowMeans(reg[, 4:ncol(reg)], na.rm = TRUE)
+  reg$ncol <- row_means
+  reg$ncol[is.na(reg$ncol)] <- 0
+  Seurat_object@meta.data$CCIcount <- reg$ncol
+  Seurat_object@meta.data$Strength <- reg$ncol
+  
+  min_value <- 0
+  max_value <-  max(Seurat_object@meta.data$Strength)
+  
+  
+  #p2 <- SpatialFeaturePlot(Seurat_object, features = "Strength")  
+  p_all_average <- SpatialFeaturePlot(Seurat_object, features = "Strength",pt.size.factor = plot_size)  + 
+    ggplot2::scale_fill_gradient2(low = "black", high = "yellow", mid = "purple3", limits =c(0,max_value),midpoint = max_value/2, space = "Lab")
+  
+  
+  return(p_all_average)
+  
+}
+
+
+
+
+
+
+
 #' Plot Localized Hotspot Pattern
 #'
 #' Visualize the inferred cell-cell interaction localized pattern if NOT using Seurat Object
@@ -226,11 +449,11 @@ plot_localized_Seurat <- function(Seurat_object,
 #' # Run localized hotspot plot
 #' Result <- run_SpaCCI(..., analysis_scale = "local",...)
 #' local_plot <- plot_localized(spatial_coord = spatial_coords_df,
-#'                             resultdf_list = Result$dataframelist,
-#'                             RegionIDs_matrix = Result$RegionIDs_matrix,
-#'                             celltype_ligand = "Beta_cells",
-#'                             celltype_receptor = "T_ells",
-#'                             plot_size = 3)
+#'                              resultdf_list = Result$dataframelist,
+#'                              RegionIDs_matrix = Result$RegionIDs_matrix,
+#'                              celltype_ligand = "Beta_cells",
+#'                              celltype_receptor = "T_ells",
+#'                              plot_size = 3)
 
 #' }
 #'
@@ -342,6 +565,179 @@ plot_localized <- function(spatial_coord,
 
 
 }
+
+
+
+#' Plot Localized Hotspot Strength Pattern
+#'
+#' Visualize the inferred cell-cell interaction localized pattern if NOT using Seurat Object
+#'
+#' @param spatial_coord A data frame of the spatial coordinates. The columns should include \code{"Spot_ID"}, \code{"imagerow"}, and \code{"imagecol"}. And the row names must be the names of \code{"Spot_ID"}, which is the same as the rownames in cell type proportion data frame or the colnames of the gene* spot expression data frame
+#' @param resultdf_list A result of data frame list from the output of \code{run_SpaCCI(..., analysis_scale = "local",...)} \code{`dataframelist`}
+#' @param RegionIDs_matrix A result of matrix list from the output of \code{run_SpaCCI(..., analysis_scale = "local",...)} \code{`RegionIDs_matrix`}
+#' @param celltype_ligand Ligand cell type string inputted by user, the name of the cell type should match the names in the \code{`spot_cell_proportion_dataframe`} during the \code{run_SpaCCI} analysis.
+#' @param celltype_receptor Receptor cell type string inputted by user, the name of the cell type should match the names in the \code{`spot_cell_proportion_dataframe`} during the \code{run_SpaCCI} analysis.
+#' @param plot_size As this function incorporate with \code{Seurat}'s \code{`SpatialFeaturePlot`}, this parameter could control the plotting size of the each spot.
+#' @param L_R_pair_name Initially this is set to \code{NULL}, if one is interested in a specific Ligand-Receptor pair, then one could specify the L_R_pair_name here. Note: the input name should match the L-R pair name exists in the dataframe in the output of SpaCCI_local "dataframelist".
+#' @importFrom ggplot2 ggplot aes geom_point scale_color_gradient2 labs xlim ylim theme element_blank element_text element_rect margin unit
+#' @importFrom dplyr %>% filter select mutate arrange group_by summarise
+#'
+#' @return The localized plot from the inferred cell-cell interaction on the local scale.
+#'
+#' @examples
+#' \donttest{
+#' # Run localized hotspot plot
+#' Result <- run_SpaCCI(..., analysis_scale = "local",...)
+#' local_plot <- plot_Strength_localized(spatial_coord = spatial_coords_df,
+#'                                       resultdf_list = Result$dataframelist,
+#'                                       RegionIDs_matrix = Result$RegionIDs_matrix,
+#'                                       celltype_ligand = "Beta_cells",
+#'                                       celltype_receptor = "T_ells",
+#'                                       plot_size = 3)
+
+#' }
+#'
+#' @export
+#'
+
+plot_Strength_localized <- function(spatial_coord,
+                                    resultdf_list,
+                                    RegionIDs_matrix,
+                                    celltype_ligand,
+                                    celltype_receptor,
+                                    plot_size,
+                                    L_R_pair_name = NULL){
+  
+  centerIDs <- names(resultdf_list)
+  inter_name <- lapply(resultdf_list, function(df){ g<- unique(df$interaction_name)})
+  inter_name <- unique(unlist(inter_name))
+  # Assuming 'resultdf_list' is your list of data frames
+  if (celltype_ligand == celltype_receptor){
+    cleaned_dfs <- lapply(resultdf_list, function(df) {
+      df <- df[which(df$Cell_type_Ligand == celltype_ligand & df$Cell_type_Receptor == celltype_receptor),]
+      nameL <- paste("Null_avg_L", celltype_ligand)
+      nameR <- paste("Null_avg_R", celltype_receptor)
+      
+      if (!is.null(L_R_pair_name)){
+        df_clean <- df[which( df$interaction_name %in% L_R_pair_name ), ]
+      }else {
+        df_clean <- df
+      }
+      # Return the cleaned data frame
+      return(df_clean)
+    })
+  }else{
+    cleaned_dfs <- lapply(resultdf_list, function(df) {
+      
+      df_clean <- df[which(df$Cell_type_Ligand == celltype_ligand & df$Cell_type_Receptor == celltype_receptor),]
+      if (!is.null(L_R_pair_name)){
+        df_clean <- df_clean[which( df_clean$interaction_name %in% L_R_pair_name ), ]
+      }
+      # Return the cleaned data frame
+      return(df_clean)
+    })
+  }
+  
+  # For each data frame, count the rows where 'strength' > 0
+  strength_values <- unlist(sapply(cleaned_dfs, function(df) {
+    if ("strength" %in% colnames(df)) {
+      if (length(df$strength) > 0) {
+        df$strength
+      } else {
+        0
+      }
+    } else {
+      0
+    }
+  }))
+  count_rows <- strength_values
+  g <- as.data.frame(count_rows)
+  spatial_coord$CCIcount <- 0
+  
+  ############################## option 1#################################################
+  for (row_name in rownames(g)) {
+    if (row_name %in% rownames(spatial_coord)) {
+      spatial_coord[row_name, "CCIcount"] <- g[row_name, "count_rows"]
+    }
+  }
+  
+  df <- spatial_coord
+  df <- df[,c("CCIcount"),drop=FALSE]
+  
+  reg <- data.frame(nrow = (rownames(spatial_coord)), ncol = 0 )
+  rownames(reg) <- reg$nrow
+  reg$CCIcount <- 0
+  for (row_name in rownames(g)) {
+    if (row_name %in% rownames(reg)) {
+      reg[row_name, "CCIcount"] <- g[row_name, "count_rows"]
+    }
+  }
+  
+  # Add a column in reg for each centerID and initialize it to 0
+  for (id in centerIDs) { reg[[paste0(id)]] <- NA}
+  # Iterate over centerIDs and update the corresponding column in reg
+  for (id in centerIDs) {
+    # Get the corresponding IDs from RegionIDs_matrix
+    IDs <- RegionIDs_matrix[[id]]
+    # Update the corresponding column in reg for rows that match the IDs
+    reg[rownames(reg) %in% IDs , id] <- g[id, ]
+  }
+  
+  
+  row_means <- rowMeans(reg[, 4:ncol(reg)], na.rm = TRUE)
+  reg$ncol <- row_means
+  reg$ncol[is.na(reg$ncol)] <- 0
+  spatial_coord$CCIcount <- reg$ncol
+  spatial_coord$Strength <- reg$ncol
+  
+  min_value <- 0
+  max_value <-  max(spatial_coord$Strength )
+  
+  p_all_average <- ggplot(spatial_coord, aes(x = imagecol, y = imagerow, colour = Strength)) +
+    geom_point(alpha = 0.9, size = plot_size, stroke = 0, shape = 16) +
+    #scale_colour_gradient(low = "#F0F0F0", high = '#F29403') +
+    scale_color_gradient2(low = "black", mid = "purple", high = "yellow", limits = c(0, max_value), midpoint = max_value / 2, space = "Lab") +
+    labs(color = "Strength", x = "X Center", y = "Y Center") +
+    xlim((floor(min(spatial_coord$imagecol)/25)*25), (ceiling(max(spatial_coord$imagecol)/25)*25) ) + ylim((floor(min(spatial_coord$imagerow)/25)*25), (ceiling(max(spatial_coord$imagerow)/25)*25) ) +
+    theme(
+      plot.margin = margin(0.35, 0.35, 0.35, 0.35, "cm"),
+      panel.background = element_rect(colour = "white", fill = "white"),
+      plot.background = element_rect(colour = "white", fill = "white"),
+      panel.border = element_rect(colour = "grey39", fill = NA, size = 0.5),
+      axis.title.y = element_blank(),
+      axis.title.x = element_blank(),
+      legend.text = element_text(size = 4),
+      legend.position = 'top',
+      legend.key = element_rect(colour = "transparent", fill = "white"),
+      legend.key.size = unit(0.5, 'cm')
+    )
+  
+  
+  
+  
+  return(p_all_average)
+  
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #' Plot SpaCCI Results on the heatmap
@@ -609,12 +1005,13 @@ plot_SpaCCI_chordDiagram <- function(SpaCCI_Result_List, specific_celltypes = NU
     stop("There are no significant interactions")
   }
 
-  mat <- count_mat + sum(count_mat) / (ncol(count_mat) * ncol(count_mat))
+  mat <- count_mat  # + sum(count_mat) / (ncol(count_mat) * ncol(count_mat))
   df <- data.frame(from = rep(rownames(mat), times = ncol(mat)),
                    to = rep(colnames(mat), each = nrow(mat)),
                    value = as.vector(mat),
                    stringsAsFactors = FALSE)
-
+  df$value <- ifelse(df$value == 0, 1e-10, df$value)
+  
   circlize::chordDiagram(df, annotationTrack = c("name", "grid"),
                grid.col = colors,
                link.arr.type = "big.arrow",

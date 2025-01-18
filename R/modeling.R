@@ -158,7 +158,7 @@ random_region <- function(spatial_coord, center_id, n_ids){
 #' }
 #'
 #' @importFrom nnls nnls
-#' @importFrom stats p.adjust sapply
+#' @importFrom stats p.adjust 
 #' @importFrom utils txtProgressBar setTxtProgressBar
 #'
 #' @export
@@ -319,15 +319,6 @@ SpaCCI_local <- function(gene_spot_df,
                              null_expression,
                              nboot)
 
-      #averageResult <- Local_Regional_Permutations(permutationMatrix,
-      #                                             permut_col,
-      #                                             cellPropMatrix,
-      #                                             GeneSpotMatrix,
-      #                                             LigandVectorIndex,
-      #                                             ReceptorVectorIndex,
-      #                                             null_expression,
-      #                                             nboot)
-
 
 
       colnames(averageResult) <- colnames(spot_cell_prop_df)
@@ -339,6 +330,8 @@ SpaCCI_local <- function(gene_spot_df,
         Cell_type_Receptor = names(null_avg_receptor)[non_zero_indices[,2]]
       )
       re <- averageResult[non_zero_indices]
+      strength <- null_expression[non_zero_indices]
+      nul$strength <- strength
       nul$PValue <- re
       nul$adjusted.PValue <- p.adjust(nul$PValue, method = "BH")
       nul$adjusted.PValue <- nul$PValue
@@ -383,6 +376,7 @@ SpaCCI_local <- function(gene_spot_df,
 #'
 #' @param gene_spot_df A data frame where the rows are genes and the columns are spots (Spot_IDs), representing gene expression levels across spatial spots.
 #' @param spot_cell_prop_df A data frame of cell type proportions for each spot. The rows represent spots (Spot_IDs), and the columns represent different cell types.
+#' @param spatial_coord A data frame of the spatial coordinates. The column names should include `c("Spot_ID", "imagerow", "imagecol")`, and the row names must be the Spot_IDs, which is the same as the row names in the cell type proportion data frame or the column names of the gene*spot expression data frame.
 #' @param region_spot_IDs A vector of Spot_IDs representing the spots included in the region of interest.
 #' @param matching_L_R_pairs A data frame containing matching ligand-receptor pairs. Each row corresponds to a ligand-receptor pair, with columns for \code{ligand_vector} and \code{receptor_vector}.
 #' @param matching_L_R_pairs_info A data frame providing additional information for each ligand-receptor pair, such as pathway information.
@@ -393,6 +387,8 @@ SpaCCI_local <- function(gene_spot_df,
 #' }
 #'
 #' @importFrom nnls nnls
+#' @importFrom FNN get.knn
+#' @importFrom Matrix Matrix
 #' @importFrom stats p.adjust
 #' @importFrom utils txtProgressBar setTxtProgressBar
 #'
@@ -401,12 +397,24 @@ SpaCCI_local <- function(gene_spot_df,
 
 SpaCCI_region <- function(gene_spot_df,
                           spot_cell_prop_df,
+                          spatial_coord,
                           region_spot_IDs,
                           matching_L_R_pairs,
                           matching_L_R_pairs_info){
   ## prepared for permutation
   cellPropMatrix <- as.matrix(spot_cell_prop_df)
   GeneSpotMatrix <- as.matrix(gene_spot_df)
+  
+  ##### create spatial weights accounting the spatial relationship #######
+  k <- 15
+  nn <- get.knn(spatial_coord[region_spot_IDs,c("imagecol", "imagerow")],k=k)
+  n <- nrow(spatial_coord[region_spot_IDs,])
+  weight_matrix <- matrix(0,n,n)
+  for(i in 1:n){
+    weight_matrix[i,nn$nn.index[i,]] <- 1/(k)
+  }
+  
+  
   # construct permutation IDs
   nboot <- 1000
   indices <- as.numeric(match(colnames(gene_spot_df[,-which(colnames(gene_spot_df) %in% region_spot_IDs )]), colnames(gene_spot_df) ))
@@ -513,6 +521,13 @@ SpaCCI_region <- function(gene_spot_df,
     transformed_t_f <- t_f / (0.5 + t_f)
     null_expression <- as.matrix(transformed_t * prop_t )
     null_expression_f <- as.matrix(transformed_t_f * prop_t )
+    
+    sparse_weight_matrix <- Matrix::Matrix(weight_matrix, sparse=TRUE)
+    sparse_cellPropMatrix <- Matrix::Matrix(cellPropMatrix[region_spot_IDs, ],sparse = TRUE)
+    interaction_matrix <- Matrix::t(sparse_cellPropMatrix) %*% sparse_weight_matrix %*% sparse_cellPropMatrix
+    # Convert to a dense matrix if needed
+    interaction_matrix <- as.matrix(interaction_matrix)
+    
 
     ################# Permutation ##############
     LigandVectorIndex <- c(which(rownames(gene_spot_df) %in% c(matching_L_R_pairs$ligand_vector[[i]])))
@@ -530,28 +545,19 @@ SpaCCI_region <- function(gene_spot_df,
                            nboot)
 
 
-    #averageResult <- Local_Regional_Permutations(permutationMatrix,
-    #                                             permut_col,
-    #                                             cellPropMatrix,
-    #                                             GeneSpotMatrix,
-    #                                             LigandVectorIndex,
-    #                                             ReceptorVectorIndex,
-    #                                             null_expression,
-    #                                             nboot)
-
-
-
     colnames(averageResult) <- colnames(spot_cell_prop_df)
     rownames(averageResult) <- colnames(spot_cell_prop_df)
     #p_vector <- as.vector(averageResult)
 
     t <- outer(null_avg_ligand, null_avg_receptor, `*`) # row are ligand, col are receptor
-    non_zero_indices <- which(null_expression_f != 0,arr.ind = TRUE)
+    non_zero_indices <- which(null_expression_f != 0 & interaction_matrix != 0 ,arr.ind = TRUE)
     nul <- data.frame(
       Cell_type_Ligand = names(null_avg_ligand)[non_zero_indices[,1]],
       Cell_type_Receptor = names(null_avg_receptor)[non_zero_indices[,2]]
     )
     re <- averageResult[non_zero_indices]
+    strength <- null_expression[non_zero_indices]
+    nul$strength <- strength
     nul$PValue <- re
     nul$adjusted.PValue <- p.adjust(nul$PValue, method = "BH")
     nul$adjusted.PValue <- nul$PValue
@@ -589,6 +595,7 @@ SpaCCI_region <- function(gene_spot_df,
 #'
 #' @param gene_spot_df A data frame where the rows are genes and the columns are spots (Spot_IDs), representing gene expression levels across spatial spots.
 #' @param spot_cell_prop_df A data frame of cell type proportions for each spot. The rows represent spots (Spot_IDs), and the columns represent different cell types.
+#' @param spatial_coord A data frame of the spatial coordinates. The column names should include `c("Spot_ID", "imagerow", "imagecol")`, and the row names must be the Spot_IDs, which is the same as the row names in the cell type proportion data frame or the column names of the gene*spot expression data frame.
 #' @param matching_L_R_pairs A data frame containing matching ligand-receptor pairs. Each row corresponds to a ligand-receptor pair, with columns for \code{ligand_vector} and \code{receptor_vector}.
 #' @param matching_L_R_pairs_info A data frame providing additional information for each ligand-receptor pair, such as pathway information.
 #'
@@ -598,6 +605,8 @@ SpaCCI_region <- function(gene_spot_df,
 #' }
 #'
 #' @importFrom nnls nnls
+#' @importFrom FNN get.knn
+#' @importFrom Matrix Matrix
 #' @importFrom stats p.adjust
 #' @importFrom utils txtProgressBar setTxtProgressBar
 #'
@@ -605,41 +614,46 @@ SpaCCI_region <- function(gene_spot_df,
 #'
 SpaCCI_global <- function(gene_spot_df,
                           spot_cell_prop_df,
+                          spatial_coord,
                           matching_L_R_pairs,
                           matching_L_R_pairs_info){
   ## prepared for permutation
   cellPropMatrix <- as.matrix(spot_cell_prop_df)
   GeneSpotMatrix <- as.matrix(gene_spot_df)
   region_spot_IDs <- rownames(spot_cell_prop_df)
-  # construct permutation IDs
+  
+  ##### create spatial weights accounting the spatial relationship #######
+  k <- 15
+  nn <- get.knn(spatial_coord[,c("imagecol", "imagerow")],k=k)
+  n <- nrow(spatial_coord)
+  weight_matrix <- matrix(0,n,n)
+  for(i in 1:n){
+    weight_matrix[i,nn$nn.index[i,]] <- 1/(k)
+  }
+  ########### construct permutation IDs ######################
   nboot <- 500
   permutation <- replicate(nboot, sample(ncol(gene_spot_df), size = length(colnames(gene_spot_df))))
-  permut_col <- replicate(nboot, GetShuffledCT(length(colnames(spot_cell_prop_df))) )
-
-
+  permut_col <- replicate(nboot,sample(length(colnames(spot_cell_prop_df))) )
   permutationMatrix <- as.matrix(permutation)
   matching_indices <- numeric(length(region_spot_IDs))
   for (ss in seq_along(region_spot_IDs)) {
     matching_indices[ss] <- which(colnames(gene_spot_df) == region_spot_IDs[ss])
   }
   permut_null_regionMatrix <- as.matrix(matching_indices)
+  
   output <- list()
-
-
+  
   pb <- txtProgressBar(min = 0, max =  nrow(matching_L_R_pairs), style = 3, file = stderr())
-  ############ start ############
+  ################## start ##########################################################################
   for (i in 1:nrow(matching_L_R_pairs)){
     setTxtProgressBar(pb, i)
     avg_ligand_list <- vector("list", length = length(matching_L_R_pairs$ligand_vector[[i]]))
     avg_receptor_list <- vector("list", length = length(matching_L_R_pairs$receptor_vector[[i]]))
-    avg_ligand_list_f <- vector("list", length = length(matching_L_R_pairs$ligand_vector[[i]]))
-    avg_receptor_list_f <- vector("list", length = length(matching_L_R_pairs$receptor_vector[[i]]))
-    #.   Ligand
+    
     for (l in 1: length(c(matching_L_R_pairs$ligand_vector[[i]])) ){
-
+      # Define cell proportion matrix (P), gene expression vector (g), and spatial weight matrix (W)
       y1 <- t(gene_spot_df[c(matching_L_R_pairs$ligand_vector[[i]][l]),region_spot_IDs])
       x1 <- cellPropMatrix[region_spot_IDs, ]
-
       if (length(region_spot_IDs) < 2){
         truth <- rep(0, length(colnames(spot_cell_prop_df)))
         names(truth) <- colnames(spot_cell_prop_df)
@@ -647,34 +661,24 @@ SpaCCI_global <- function(gene_spot_df,
         mod1 <- nnls(x1, y1)
         truth <- mod1$x
         names(truth) <- colnames(spot_cell_prop_df)
-        truth_f <- truth
-        threshols2 <-  1/sum(truth > 0 )
-        truth_f[ truth/sum(truth) < threshols2] <- 0
-
-
+        
       }
-
       avg_ligand_list[[l]] <- truth
-      avg_ligand_list_f[[l]] <- truth_f
-
+      
     }
     # Calculate the product of corresponding elements across all vectors
     product_vector <- Reduce("*", avg_ligand_list)
-    product_vector_f <- Reduce("*", avg_ligand_list_f)
     # Calculate the nth root of the product, where n is the number of vectors
     n <- length(avg_ligand_list)
     null_avg_ligand <- product_vector^(1/n)
-    null_avg_ligand_f <- product_vector_f^(1/n)
-
-
+    
+    
     #.   Receptor
     for (r in 1: length(c(matching_L_R_pairs$receptor_vector[[i]])) ){
-
-
-      ###True expression from the region ########
+      
       y1 <- t(gene_spot_df[c(matching_L_R_pairs$receptor_vector[[i]][r]),region_spot_IDs])
       x1 <- cellPropMatrix[region_spot_IDs, ]
-
+      
       if (length(region_spot_IDs) < 2){
         truth <- rep(0, length(colnames(spot_cell_prop_df)))
         names(truth) <- colnames(spot_cell_prop_df)
@@ -682,43 +686,38 @@ SpaCCI_global <- function(gene_spot_df,
         mod1 <- nnls(x1, y1)
         truth <- mod1$x
         names(truth) <- colnames(spot_cell_prop_df)
-        truth_f <- truth
-        threshols2 <-  1/sum(truth > 0 )
-        truth_f[ truth/sum(truth) < threshols2] <- 0
-
       }
-
-
-
+      
       avg_receptor_list[[r]] <- truth
-      avg_receptor_list_f[[r]] <- truth_f
     }
     # Calculate the product of corresponding elements across all vectors
     product_vector <- Reduce("*", avg_receptor_list)
-    product_vector_f <- Reduce("*", avg_receptor_list_f)
     # Calculate the nth root of the product, where n is the number of vectors
     n <- length(avg_receptor_list)
     null_avg_receptor <- product_vector^(1/n)
-    null_avg_receptor_f <- product_vector_f^(1/n)
-
     t <- outer(null_avg_ligand, null_avg_receptor, `*`)
-    t_f <- outer(null_avg_ligand_f, null_avg_receptor_f, `*`)
-
-
-    #prop <- spot_cell_prop_df
-    prop_t <- outer(colSums(spot_cell_prop_df)/nrow(spot_cell_prop_df), colSums(spot_cell_prop_df)/nrow(spot_cell_prop_df), `*`)
-    transformed_t <- t / (0.5 + t)
-    transformed_t_f <- t_f / (0.5 + t_f)
-    null_expression <- as.matrix(transformed_t * prop_t )
-    null_expression_f <- as.matrix(transformed_t_f * prop_t )
-    #null_expression <- as.matrix(transformed_t  )
-
+    ################
+    #cellPropMatrix <- as.matrix(spot_cell_prop_df)
+    sparse_weight_matrix <- Matrix::Matrix(weight_matrix, sparse=TRUE)
+    sparse_cellPropMatrix <- Matrix::Matrix(cellPropMatrix,sparse = TRUE)
+    #print(class(sparse_cellPropMatrix))
+    ##print(str(sparse_cellPropMatrix))
+    interaction_matrix <- Matrix::t(sparse_cellPropMatrix) %*% sparse_weight_matrix %*% sparse_cellPropMatrix
+    # Convert to a dense matrix if needed
+    interaction_matrix <- as.matrix(interaction_matrix)
+    
+    prop_t <- (outer(colSums(spot_cell_prop_df)/nrow(spot_cell_prop_df), colSums(spot_cell_prop_df)/nrow(spot_cell_prop_df), `*`))
+    
+    
+    transformed_t <- t/ (0.5 + t)
+    null_expression <- as.matrix( transformed_t*prop_t )
+    
+    
     ################# Permutation ##############
     LigandVectorIndex <- c(which(rownames(gene_spot_df) %in% c(matching_L_R_pairs$ligand_vector[[i]])))
     ReceptorVectorIndex <- c(which(rownames(gene_spot_df) %in% c(matching_L_R_pairs$receptor_vector[[i]])))
     # Call the function
-    ## global1 with null_expression_f works
-    averageResult <- .Call("_SpaCCI_Local_Regional_Permutations",
+    averageResult <- .Call("_SpaCCI_Global_Permutations",
                            permutationMatrix,
                            permut_col,
                            cellPropMatrix,
@@ -727,26 +726,13 @@ SpaCCI_global <- function(gene_spot_df,
                            ReceptorVectorIndex,
                            null_expression,
                            nboot)
-
-
-    #averageResult <- Global_Permutations(permutationMatrix,
-    #                                     permut_null_regionMatrix,
-    #                                     permut_col,
-    #                                     cellPropMatrix,
-    #                                     GeneSpotMatrix,
-    #                                     LigandVectorIndex,
-    #                                     ReceptorVectorIndex,
-    #                                     null_expression_f,
-    #                                     nboot)
-
-
-
+    
+    
     colnames(averageResult) <- colnames(spot_cell_prop_df)
     rownames(averageResult) <- colnames(spot_cell_prop_df)
     #p_vector <- as.vector(averageResult)
-
     #t <- outer(null_avg_ligand, null_avg_receptor, `*`) # row are ligand, col are receptor
-    non_zero_indices <- which(null_expression != 0,arr.ind = TRUE)
+    non_zero_indices <- which( (null_expression != 0 & interaction_matrix !=0 ),arr.ind = TRUE)
     nul <- data.frame(
       Cell_type_Ligand = names(null_avg_ligand)[non_zero_indices[,1]],
       Cell_type_Receptor = names(null_avg_receptor)[non_zero_indices[,2]]
@@ -757,17 +743,17 @@ SpaCCI_global <- function(gene_spot_df,
     nul$PValue <- re
     nul$adjusted.PValue <- p.adjust(nul$PValue, method = "BH")
     nul$adjusted.PValue <- nul$PValue
-
+    
     output[[i]] <- nul
-
+    
   }
-
-
+  
+  
   close(con = pb)
-
+  
   message("writing data frame")
   ##############
-
+  
   table <- lapply(seq_along(output), function(i) {
     df <- output[[i]]
     interaction_info <- matching_L_R_pairs_info[i, ,drop=FALSE]
@@ -777,11 +763,8 @@ SpaCCI_global <- function(gene_spot_df,
     return(df)
   })
   dataframe <- do.call(rbind, table)
-
-
+  
+  
   return(list(pvalue_df = dataframe ))
 }
-
-
-
 
