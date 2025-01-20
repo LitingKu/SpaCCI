@@ -64,3 +64,30 @@ search: false
   text-decoration: underline;
   color: #83c5be !important;
 }
+
+/* Adjust the middle content width */
+.wrapper {
+  max-width: 1200px !important; /* Increase the maximum width */
+  margin: 0 auto; /* Center the content */
+}
+
+.page__content {
+  width: 80% !important; /* Adjust the percentage width */
+  font-size: 0.9rem !important; /* Reduce the text size */
+  line-height: 1.5rem !important; /* Adjust line height for readability */
+}
+
+/* Adjust sidebar width */
+.sidebar {
+  width: 15% !important; /* Make the sidebar narrower */
+}
+
+.greedy-nav {
+  width: 15% !important; /* Make the top navigation narrower */
+}
+
+/* Adjust text size for the main content */
+.page__content p {
+  font-size: 0.85rem !important; /* Smaller font size */
+  line-height: 1.4 !important; /* Adjust line spacing */
+}
