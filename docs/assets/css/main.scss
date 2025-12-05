@@ -90,15 +90,10 @@ search: false
   font-size: 0.55rem !important;   /* your desired small size */
 }
 
-/* 1. Block code: <pre><code>…</code></pre> */
-.page__content pre code {
-  background-color: #f5f7fa !important;  /* block background */
-  color: #2d2d2d !important;             /* block text color */
-}
 
 /* 2. Inline code: code inside text, not inside <pre> */
 .page__content :not(pre) > code {
   background-color: #eef2f5 !important;  /* inline background */
-  color: #7dcd85 !important;             /* inline text color */
+  color: #38a3a5 !important;             /* inline text color */
 }
 
