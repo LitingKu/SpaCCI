@@ -85,8 +85,27 @@ search: false
   line-height: 1.4 !important; /* Adjust line spacing */
 }
 
-.page__content code,
-.page__content pre {
-  font-size: 0.45rem !important;
+/* Make FULL code block text smaller */
+.page__content pre code {
+  font-size: 0.55rem !important;   /* your desired small size */
+  line-height: 1.2 !important;     /* optional: tighter spacing */
 }
-  
+
+/* Override the dark code block background */
+.highlight,
+.highlighter-rouge pre,
+pre.highlight {
+  background-color: #f5f7fa !important; 
+  color: #2d2d2d !important;
+  border-radius: 6px;
+  border: 1px solid #d0d7de;
+}
+
+/* Change inline code too (optional) */
+.page__content code {
+  background-color: #eef2f5 !important;
+  color: #7dcd85 !important;
+  border-radius: 4px;
+  padding: 0.1rem 0.3rem;
+}
+
