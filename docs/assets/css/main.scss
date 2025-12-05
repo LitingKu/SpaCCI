@@ -88,24 +88,17 @@ search: false
 /* Make FULL code block text smaller */
 .page__content pre code {
   font-size: 0.55rem !important;   /* your desired small size */
-  line-height: 1.2 !important;     /* optional: tighter spacing */
 }
 
-/* Override the dark code block background */
-.highlight,
-.highlighter-rouge pre,
-pre.highlight {
-  background-color: #f5f7fa !important; 
-  color: #2d2d2d !important;
-  border-radius: 6px;
-  border: 1px solid #d0d7de;
+/* 1. Block code: <pre><code>…</code></pre> */
+.page__content pre code {
+  background-color: #f5f7fa !important;  /* block background */
+  color: #2d2d2d !important;             /* block text color */
 }
 
-/* Change inline code too (optional) */
-.page__content code {
-  background-color: #eef2f5 !important;
-  color: #7dcd85 !important;
-  border-radius: 4px;
-  padding: 0.1rem 0.3rem;
+/* 2. Inline code: code inside text, not inside <pre> */
+.page__content :not(pre) > code {
+  background-color: #eef2f5 !important;  /* inline background */
+  color: #7dcd85 !important;             /* inline text color */
 }
 
